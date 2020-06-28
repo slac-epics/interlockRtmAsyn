@@ -1,0 +1,19 @@
+#
+#    llrfHlsAsyn epics driver
+#
+1. configure/CONFIG_SITE
+
+
+2. configure/RELEASE.local
+
+
+3. <application>/src/Makefile
+
+
+4. <application>/Db/Makefile
+
+
+
+5. iocBoot/<ioc_name>/st.cmd
+
+

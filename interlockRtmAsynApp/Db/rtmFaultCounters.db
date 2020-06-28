@@ -1,0 +1,227 @@
+# Modified from HighPowerRFApp/Db/modulator/kly_modulator_fault_cnts.template
+
+record(bo,"$(PRIMARY):$(MICRO):$(UNIT):$(FAULT)_DEBUG") {
+  field(DESC,"Debug flag")
+  field(PINI, "YES")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+  info(autosaveFields,"VAL")
+}
+
+# Keep a running total of fault counts and timestamp.
+record(aSub,"$(PRIMARY):$(MICRO):$(UNIT):$(FAULT)_CNT_SUB") {
+  field(DESC, "Running total")
+  field(INAM, "kly_init")
+  field(SNAM, "kly_fault_cnt")
+  field(BRSV, "INVALID")
+#
+# Inputs:
+#   A - hw fault count
+#   B - hw fault count delta
+#   C - hw fault cnt time    format: %H:%M:%S
+#   D - today's fault count 
+#   E - today's fault count total
+#   F - reset flag (0=no reset, 1=time to reset fault counts)
+#   G - not used.
+#   H - Debug flag (0=off, 1=on)
+  field(FTA,  "LONG")
+  field(FTB,  "LONG")
+  field(FTC,  "STRING")
+  field(FTD,  "LONG")
+  field(FTE,  "LONG")
+  field(FTF,  "ULONG")
+  field(FTG,  "ULONG")
+  field(FTH,  "ULONG")
+  field(NOG,  "2")
+  field(INPA, "$(PRIMARY):$(MICRO):$(UNIT):$(FAULT)_CNT")
+  field(INPB, "$(PRIMARY):$(MICRO):$(UNIT):$(FAULT)_CNT_DELTA")
+  field(INPC, "$(PRIMARY):$(MICRO):$(UNIT):$(FAULT)_CNT_TS")
+  field(INPD, "$(PRIMARY):$(MICRO):$(UNIT):$(FAULT)_CNT_T")
+  field(INPE, "$(PRIMARY):$(MICRO):$(UNIT):$(FAULT)_TOTAL_T")
+  field(INPF, "$(PRIMARY):$(MICRO):$(UNIT):MOD:FLT_ALARM_CLK.RVAL")
+  field(INPH, "$(PRIMARY):$(MICRO):$(UNIT):$(FAULT)_DEBUG.RVAL")
+#
+# Outputs:
+#    VALA - today fault count
+#    VALB - timestamp of today's fault count or reset, format: %H:%M:%S
+#    VALC - today's fault total
+#    VALD - timestamp of today's total fault count or reset, format: %H:%M:%S
+   field(FTVA, "LONG")
+   field(FTVB, "STRING")
+   field(FTVC, "LONG")
+   field(FTVD, "STRING")
+
+# Update today's fault cnts, totals and time stamps
+   field(OUTA, "$(PRIMARY):$(MICRO):$(UNIT):$(FAULT)_CNT_T PP")
+   field(OUTB, "$(PRIMARY):$(MICRO):$(UNIT):$(FAULT)_CNT_TS_T PP")
+   field(OUTC, "$(PRIMARY):$(MICRO):$(UNIT):$(FAULT)_TOTAL_T PP")
+   field(OUTD, "$(PRIMARY):$(MICRO):$(UNIT):$(FAULT)_TOTAL_TS_T PP")
+#
+# Disable this pv on boot, re-enable after
+# inputs to this pv have been initialized.
+   field(DISV, "1")
+   info(autosaveFields,"VALA VALB VALC VALD")
+}
+
+############# Current Hardware Fault Counts ##################
+
+# PVs to initalize at boot
+record(seq,"$(PRIMARY):$(MICRO):$(UNIT):$(FAULT)_INIT") {
+  field(DESC, "Init pvs on boot in order")
+  field(PINI, "YES")
+  field(DOL1, "1")
+  field(DOL2, "1")
+  field(DOL3, "1")
+  field(LNK1, "$(PRIMARY):$(MICRO):$(UNIT):$(FAULT)_CNT.PROC PP")
+  field(LNK2, "$(PRIMARY):$(MICRO):$(UNIT):$(FAULT)_TOTAL.PROC PP")
+  field(LNK3, "$(PRIMARY):$(MICRO):$(UNIT):$(FAULT)_CNT_TS.OMSL")
+# Enable processing of pv
+  field(LNK4, "$(PRIMARY):$(MICRO):$(UNIT):$(FAULT)_CNT_SUB.DISA PP")
+}
+
+record(longin, "$(PRIMARY):$(MICRO):$(UNIT):$(FAULT)_CNT") {
+  field(INP,  "$(PRIMARY):$(MICRO):$(UNIT):$(FAULT) CPP")
+  field(DESC, "Hw fault cnts")
+  field(FLNK, "$(PRIMARY):$(MICRO):$(UNIT):$(FAULT)_CNT_RAW_TS")
+}
+record(stringin, "$(PRIMARY):$(MICRO):$(UNIT):$(FAULT)_CNT_RAW_TS") {
+  field(DESC, "hw fault count time")
+  field(ASG,  "Internal")
+  field(DTYP, "Soft Timestamp")
+  field(INP, "@%H:%M:%S")
+  field(FLNK, "$(PRIMARY):$(MICRO):$(UNIT):$(FAULT)_CNT_DELTA")
+}
+record(calcout, "$(PRIMARY):$(MICRO):$(UNIT):$(FAULT)_CNT_DELTA") {
+  field(DESC, "Hw Delta faults")
+  field(OOPT, "When Non-zero")
+  field(CALC, "A")
+  field(INPA, "$(PRIMARY):$(MICRO):$(UNIT):$(FAULT)_CNT")
+  field(OUT,  "$(PRIMARY):$(MICRO):$(UNIT):$(FAULT)_TOTAL_CALC.A PP")
+}
+record(calcout, "$(PRIMARY):$(MICRO):$(UNIT):$(FAULT)_TOTAL_CALC") {
+   field(DESC, "Calculate total faults")
+   field(ASG,  "Internal")
+   field(CALC, "A+B")
+   field(INPA, "$(PRIMARY):$(MICRO):$(UNIT):$(FAULT)_CNT_DELTA") 
+   field(INPB, "$(PRIMARY):$(MICRO):$(UNIT):$(FAULT)_TOTAL")
+   field(OUT,  "$(PRIMARY):$(MICRO):$(UNIT):$(FAULT)_TOTAL PP")
+   info(autosaveFields,"VAL")
+}
+record(longout, "$(PRIMARY):$(MICRO):$(UNIT):$(FAULT)_TOTAL") {
+   field(DESC, "Hw fault cnts")
+   field(PINI, "YES")
+   field(FLNK, "$(PRIMARY):$(MICRO):$(UNIT):$(FAULT)_CNT_TS")
+   info(autosaveFields,"VAL")
+}
+record(stringout, "$(PRIMARY):$(MICRO):$(UNIT):$(FAULT)_CNT_TS") {
+  field(DESC, "Hw Fault Cnt timestamp")
+  field(DOL,  "$(PRIMARY):$(MICRO):$(UNIT):$(FAULT)_CNT_RAW_TS")
+  field(OUT,  "$(PRIMARY):$(MICRO):$(UNIT):$(FAULT)_TOTAL_TS PP")
+  field(FLNK, "$(PRIMARY):$(MICRO):$(UNIT):$(FAULT)_CNT_SUB")
+  info(autosaveFields,"VAL")
+}
+record(stringout, "$(PRIMARY):$(MICRO):$(UNIT):$(FAULT)_TOTAL_TS") {
+  field(DESC, "Hw fault totals timestamp")
+  field(DOL,  "$(PRIMARY):$(MICRO):$(UNIT):$(FAULT)_CNT_TS")
+  field(OMSL, "closed_loop")
+  info(autosaveFields,"VAL")
+}
+
+############# Today's fault counts ##################
+
+# Today's 24-hour fault counts accumulated
+# Note: on boot the OMSL=supervisory so we can restore
+# the saved data. However, when the alarm clock goes off
+# to zero today's fault counts, or the hw fault count
+# has changed, then the pv <dev>:<attr>_CNT_SUB_SEQ
+# the following pvs.
+#
+record(longout, "$(PRIMARY):$(MICRO):$(UNIT):$(FAULT)_CNT_T") {
+  field(DESC, "Today's faults")
+  field(EGU,  "Faults")
+  field(PINI, "YES")
+  info(autosaveFields,"VAL")
+}
+record(stringout, "$(PRIMARY):$(MICRO):$(UNIT):$(FAULT)_CNT_TS_T") {
+  field(DESC, "Today's faults timestamp")
+  field(PINI, "YES")  
+  info(autosaveFields,"VAL")
+}
+record(longout, "$(PRIMARY):$(MICRO):$(UNIT):$(FAULT)_TOTAL_T" )  {
+  field(DESC, "Today's fault totals")
+  field(EGU,  "Faults")
+  field(PINI, "YES")
+  info(autosaveFields,"VAL")
+}
+record(stringout, "$(PRIMARY):$(MICRO):$(UNIT):$(FAULT)_TOTAL_TS_T") {
+  field(DESC, "Today's fault totals")
+  field(PINI, "YES")
+  info(autosaveFields,"VAL")
+}
+
+############# Yesterday's fault counts ##################
+
+# Note: on boot the OMSL=supervisory so we can restore
+# the saved data. However, when the alarm clock goes off
+# to zero today's fault counts, the following pvs
+# are updated by  pv <dev>:<attr>_SAVE
+#
+record(longout, "$(PRIMARY):$(MICRO):$(UNIT):$(FAULT)_CNT_Y") {
+  field(DESC, "Yesterday's faults")
+  field(PINI, "YES")
+  field(EGU,  "Faults")
+  field(DOL,  "$(PRIMARY):$(MICRO):$(UNIT):$(FAULT)_CNT_T")
+  info(autosaveFields, "VAL")
+}
+record(stringout, "$(PRIMARY):$(MICRO):$(UNIT):$(FAULT)_CNT_TS_Y") {
+  field(DESC, "Yesterdays faults")
+  field(PINI, "YES")
+  field(DOL,  "$(PRIMARY):$(MICRO):$(UNIT):$(FAULT)_CNT_TS_T")
+  info(autosaveFields, "VAL")
+}
+record(longout, "$(PRIMARY):$(MICRO):$(UNIT):$(FAULT)_TOTAL_Y") {
+  field(DESC, "Yesterday's fault total")
+  field(PINI, "YES")
+  field(EGU,  "Faults")
+  field(DOL,  "$(PRIMARY):$(MICRO):$(UNIT):$(FAULT)_TOTAL_T")
+  info(autosaveFields, "VAL")
+}
+record(stringout, "$(PRIMARY):$(MICRO):$(UNIT):$(FAULT)_TOTAL_TS_Y") {
+  field(DESC, "Yesterday's fault totals")
+  field(PINI, "YES")
+  field(DOL,  "$(PRIMARY):$(MICRO):$(UNIT):$(FAULT)_TOTAL_TS_T")
+  info(autosaveFields, "VAL")
+}
+
+############# Save the last 24-hours fault counts ##################
+
+# First save the total and timestamp
+# in yesteday's pvs, before resetting today's totals.
+record(seq,"$(PRIMARY):$(MICRO):$(UNIT):$(FAULT)_SAVE") {
+  field(DESC, "Save previous totals")
+  field(ASG,  "Internal")
+  field(SCAN, "Event")
+  field(EVNT, "41")
+  field(DOL1, "1")
+  field(DOL2, "1")
+  field(DOL3, "1")
+  field(DOL4, "1")
+# Set OMSL to closed loop
+  field(LNK1, "$(PRIMARY):$(MICRO):$(UNIT):$(FAULT)_TOTAL_Y.OMSL PP")
+  field(LNK2, "$(PRIMARY):$(MICRO):$(UNIT):$(FAULT)_TOTAL_TS_Y.OMSL PP")
+  field(LNK3, "$(PRIMARY):$(MICRO):$(UNIT):$(FAULT)_CNT_Y.OMSL PP")
+  field(LNK4, "$(PRIMARY):$(MICRO):$(UNIT):$(FAULT)_CNT_TS_Y.OMSL PP")
+# Set OMSL to supervisory
+  field(LNK5, "$(PRIMARY):$(MICRO):$(UNIT):$(FAULT)_TOTAL_Y.OMSL")
+  field(LNK6, "$(PRIMARY):$(MICRO):$(UNIT):$(FAULT)_TOTAL_TS_Y.OMSL")
+  field(LNK7, "$(PRIMARY):$(MICRO):$(UNIT):$(FAULT)_CNT_Y.OMSL")
+  field(LNK8, "$(PRIMARY):$(MICRO):$(UNIT):$(FAULT)_CNT_TS_Y.OMSL")
+  field(LNK9, "$(PRIMARY):$(MICRO):$(UNIT):$(FAULT)_TOTAL")
+  field(LNKA, "$(PRIMARY):$(MICRO):$(UNIT):$(FAULT)_TOTAL_CALC PP")
+# After we've save'ed today's fault counts we need
+# to zero today's totals and clear time stamp.
+# $(PRIMARY):$(MICRO):$(UNIT):$(FAULT)_CNT_SUB is FLNK'd by $(PRIMARY):$(MICRO):$(UNIT):$(FAULT)_TOTAL_CALC,
+# which clears today's totals
+}
+
+

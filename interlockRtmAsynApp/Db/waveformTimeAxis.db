@@ -1,0 +1,39 @@
+record(ao, "$(PRIMARY):$(MICRO):$(UNIT):$(WF)_WF_OFFSET")
+{
+    field(PINI, "YES")
+    field(DESC, "$(DESC) offset")
+    field(VAL,  "0")
+    field(EGU,  "us")
+    info(autosaveFields, "VAL")
+}
+
+#INPA = sampling frequency (MHz)
+#INPB = Size of waveform
+#INPC = optional offset (us)
+#VALA = Time Axis
+record(aSub, "$(PRIMARY):$(MICRO):$(UNIT):$(WF)_WF_ASUB")
+{
+    field(PINI, "YES")
+    field(DESC, "$(DESC) calc")
+    field(SNAM, "timeAxisGenerator")
+    field(ASG,  "Internal")
+
+    field(INPA, "$(FREQ)")
+    field(INPB, "$(SIZE)")
+    field(INPC, "$(PRIMARY):$(MICRO):$(UNIT):$(WF)_WF_OFFSET CP")
+
+    field(FTA, "DOUBLE")
+    field(FTB, "LONG")
+    field(FTC, "DOUBLE")
+
+    field(OUTA, "$(PRIMARY):$(MICRO):$(UNIT):$(WF)_WF_X PP")
+    field(NOVA, "$(SIZE)")
+    field(FTVA, "DOUBLE")
+}
+
+record(waveform, "$(PRIMARY):$(MICRO):$(UNIT):$(WF)_WF_X")
+{
+    field(DESC, "$(DESC)")
+    field(FTVL, "DOUBLE")
+    field(NELM, "$(SIZE)")
+}

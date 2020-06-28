@@ -1,0 +1,708 @@
+record(bo,     "$(PRIMARY):$(MICRO):$(UNIT):RTM_CLEARFAULT")
+{
+    field(DESC, "RTM Clear Fault")
+    field(DTYP, "asynInt32")
+    field(OUT,  "@asyn($(PORT),0) rtmClearFault")
+    field(OMSL, "supervisory")
+    field(SCAN, "Passive")
+    field(ZNAM, "Done")
+    field(ONAM, "Clear Fault")
+}
+
+
+record(longin, "$(PRIMARY):$(MICRO):$(UNIT):RTM_STATUS_HEX")
+{
+    field(DESC, "RTM Status in Hex")
+    field(DTYP, "asynInt32")
+    field(INP,  "@asyn($(PORT),0) rtmStatus")
+    field(SCAN, "I/O Intr")
+    field(TSE,  "-2")
+    field(FLNK, "$(PRIMARY):$(MICRO):$(UNIT):RTM_STATUS_BITS")
+}
+
+record(mbbiDirect, "$(PRIMARY):$(MICRO):$(UNIT):RTM_STATUS_BITS")
+{
+    field(DESC, "RTM Status Bits")
+    field(INP,  "$(PRIMARY):$(MICRO):$(UNIT):RTM_STATUS_HEX MS")
+    field(FLNK, "$(PRIMARY):$(MICRO):$(UNIT):RTM_RF_ON")
+}
+
+record(bi, "$(PRIMARY):$(MICRO):$(UNIT):RTM_RF_ON")
+{
+    field(DESC, "RF ON")
+    field(INP,  "$(PRIMARY):$(MICRO):$(UNIT):RTM_STATUS_BITS.BF MS")
+    field(ZNAM, "Off")
+    field(ONAM, "On")
+    field(FLNK, "$(PRIMARY):$(MICRO):$(UNIT):RTM_MOTR_TIMEOUT")
+    field(ZSV,  "MAJOR")
+    info(autosaveFields, "DESC ZNAM ONAM ZSV OSV")
+}
+
+record(bi, "$(PRIMARY):$(MICRO):$(UNIT):RTM_MOTR_TIMEOUT")
+{
+    field(DESC, "Motor Timeout")
+    field(INP,  "$(PRIMARY):$(MICRO):$(UNIT):RTM_STATUS_BITS.BE MS")
+    field(ZNAM, "OK")
+    field(ONAM, "Fault")
+    field(OSV,  "MAJOR")
+    field(FLNK, "$(PRIMARY):$(MICRO):$(UNIT):RTM_MOTR_DETUNING")
+    info(autosaveFields, "DESC ZNAM ONAM ZSV OSV")
+}
+
+record(bi, "$(PRIMARY):$(MICRO):$(UNIT):RTM_MOTR_DETUNING")
+{
+    field(DESC, "Motor Detuning (running)")
+    field(INP,  "$(PRIMARY):$(MICRO):$(UNIT):RTM_STATUS_BITS.BD MS")
+    field(ZNAM, "No")
+    field(ONAM, "Yes")
+    field(FLNK, "$(PRIMARY):$(MICRO):$(UNIT):RTM_MOTR_TUNING")
+    info(autosaveFields, "DESC ZNAM ONAM ZSV OSV")
+}
+
+record(bi, "$(PRIMARY):$(MICRO):$(UNIT):RTM_MOTR_TUNING")
+{
+    field(DESC, "Motor Tuning (running)")
+    field(INP,  "$(PRIMARY):$(MICRO):$(UNIT):RTM_STATUS_BITS.BC MS")
+    field(ZNAM, "No")
+    field(ONAM, "Yes")
+    field(FLNK, "$(PRIMARY):$(MICRO):$(UNIT):RTM_LOWER_TUNED")
+    info(autosaveFields, "DESC ZNAM ONAM ZSV OSV")
+}
+
+record(bi, "$(PRIMARY):$(MICRO):$(UNIT):RTM_LOWER_TUNED")
+{
+    field(DESC, "Lower Tuned")
+    field(INP,  "$(PRIMARY):$(MICRO):$(UNIT):RTM_STATUS_BITS.BB MS")
+    field(ZNAM, "No")
+    field(ONAM, "Yes")
+    field(FLNK, "$(PRIMARY):$(MICRO):$(UNIT):RTM_UPPER_TUNED")
+    info(autosaveFields, "DESC ZNAM ONAM ZSV OSV")
+}
+
+record(bi, "$(PRIMARY):$(MICRO):$(UNIT):RTM_UPPER_TUNED")
+{
+    field(DESC, "Upper Tuned")
+    field(INP,  "$(PRIMARY):$(MICRO):$(UNIT):RTM_STATUS_BITS.BA MS")
+    field(ZNAM, "No")
+    field(ONAM, "Yes")
+    field(FLNK, "$(PRIMARY):$(MICRO):$(UNIT):RTM_MOTR_NOT_TUNED")
+    info(autosaveFields, "DESC ZNAM ONAM ZSV OSV")
+}
+
+record(bi, "$(PRIMARY):$(MICRO):$(UNIT):RTM_MOTR_NOT_TUNED")
+{
+    field(DESC, "Motor Not Tuned")
+    field(INP,  "$(PRIMARY):$(MICRO):$(UNIT):RTM_STATUS_BITS.B9 MS")
+    field(ZNAM, "Yes")
+    field(ONAM, "No")
+    field(FLNK, "$(PRIMARY):$(MICRO):$(UNIT):RTM_LOWER_DETUNED")
+    info(autosaveFields, "DESC ZNAM ONAM ZSV OSV")
+}
+
+record(bi, "$(PRIMARY):$(MICRO):$(UNIT):RTM_LOWER_DETUNED")
+{
+    field(DESC, "Lower Detuned")
+    field(INP,  "$(PRIMARY):$(MICRO):$(UNIT):RTM_STATUS_BITS.B8 MS")
+    field(ZNAM, "No")
+    field(ONAM, "Yes")
+    field(FLNK, "$(PRIMARY):$(MICRO):$(UNIT):RTM_UPPER_DETUNED")
+    info(autosaveFields, "DESC ZNAM ONAM ZSV OSV")
+}
+
+record(bi, "$(PRIMARY):$(MICRO):$(UNIT):RTM_UPPER_DETUNED")
+{
+    field(DESC, "Upper Detuned")
+    field(INP,  "$(PRIMARY):$(MICRO):$(UNIT):RTM_STATUS_BITS.B7 MS")
+    field(ZNAM, "No")
+    field(ONAM, "Yes")
+    field(FLNK, "$(PRIMARY):$(MICRO):$(UNIT):RTM_MOTR_NOT_DETUNED")
+    info(autosaveFields, "DESC ZNAM ONAM ZSV OSV")
+}
+
+record(bi, "$(PRIMARY):$(MICRO):$(UNIT):RTM_MOTR_NOT_DETUNED")
+{
+    field(DESC, "Motor Not Detuned")
+    field(INP,  "$(PRIMARY):$(MICRO):$(UNIT):RTM_STATUS_BITS.B6 MS")
+    field(ZNAM, "Yes")
+    field(ONAM, "No")
+    field(FLNK, "$(PRIMARY):$(MICRO):$(UNIT):RTM_MOD_FAULT")
+    info(autosaveFields, "DESC ZNAM ONAM ZSV OSV")
+}
+
+record(bi, "$(PRIMARY):$(MICRO):$(UNIT):RTM_MOD_FAULT")
+{
+    field(DESC, "Modulator Fault")
+    field(INP,  "$(PRIMARY):$(MICRO):$(UNIT):RTM_STATUS_BITS.B5 MS")
+    field(ZNAM, "OK")
+    field(ONAM, "Fault")
+    field(OSV,  "MAJOR")
+    field(FLNK, "$(PRIMARY):$(MICRO):$(UNIT):RTM_CURR_UNDER")
+    info(autosaveFields, "DESC ZNAM ONAM ZSV OSV")
+}
+
+record(bi, "$(PRIMARY):$(MICRO):$(UNIT):RTM_CURR_UNDER")
+{
+    field(DESC, "Beam Current Under Threshold")
+    field(INP,  "$(PRIMARY):$(MICRO):$(UNIT):RTM_STATUS_BITS.B4 MS")
+    field(ZNAM, "OK")
+    field(ONAM, "Fault")
+    field(OSV,  "MAJOR")
+    field(FLNK, "$(PRIMARY):$(MICRO):$(UNIT):RTM_CURR_OVER")
+    info(autosaveFields, "DESC ZNAM ONAM ZSV OSV")
+}
+
+record(bi, "$(PRIMARY):$(MICRO):$(UNIT):RTM_CURR_OVER")
+{
+    field(DESC, "BEAM Current Over Threshold")
+    field(INP,  "$(PRIMARY):$(MICRO):$(UNIT):RTM_STATUS_BITS.B3 MS")
+    field(ZNAM, "OK")
+    field(ONAM, "Fault")
+    field(OSV,  "MAJOR")
+    field(FLNK, "$(PRIMARY):$(MICRO):$(UNIT):RTM_VOLT_OVER")
+    info(autosaveFields, "DESC ZNAM ONAM ZSV OSV")
+}
+
+record(bi, "$(PRIMARY):$(MICRO):$(UNIT):RTM_VOLT_OVER")
+{
+    field(DESC, "Beam Voltage Over Threshold")
+    field(INP,  "$(PRIMARY):$(MICRO):$(UNIT):RTM_STATUS_BITS.B2 MS")
+    field(ZNAM, "OK")
+    field(ONAM, "Fault")
+    field(OSV,  "MAJOR")
+    field(FLNK, "$(PRIMARY):$(MICRO):$(UNIT):RTM_FP_OVER")
+    info(autosaveFields, "DESC ZNAM ONAM ZSV OSV")
+}
+
+record(bi, "$(PRIMARY):$(MICRO):$(UNIT):RTM_FP_OVER")
+{
+    field(DESC, "Forward Power Over Threshold")
+    field(INP,  "$(PRIMARY):$(MICRO):$(UNIT):RTM_STATUS_BITS.B1 MS")
+    field(ZNAM, "OK")
+    field(ONAM, "Fault")
+    field(OSV,  "MAJOR")
+    field(FLNK, "$(PRIMARY):$(MICRO):$(UNIT):RTM_RP_OVER")
+    info(autosaveFields, "DESC ZNAM ONAM ZSV OSV")
+}
+
+record(bi, "$(PRIMARY):$(MICRO):$(UNIT):RTM_RP_OVER")
+{
+    field(DESC, "Reflect Power Over Threshold")
+    field(INP,  "$(PRIMARY):$(MICRO):$(UNIT):RTM_STATUS_BITS.B0 MS")
+    field(ZNAM, "OK")
+    field(ONAM, "Fault")
+    field(OSV,  "MAJOR")
+    field(FLNK, "$(PRIMARY):$(MICRO):$(UNIT):RTM_MOTR_ON_CALC")
+    info(autosaveFields, "DESC ZNAM ONAM ZSV OSV")
+}
+
+record(calc, "$(PRIMARY):$(MICRO):$(UNIT):RTM_MOTR_ON_CALC")
+{
+    field(DESC, "Calculate Motor On/Off")
+    field(INPA, "$(PRIMARY):$(MICRO):$(UNIT):RTM_MOTR_DETUNING")
+    field(INPB, "$(PRIMARY):$(MICRO):$(UNIT):RTM_MOTR_TUNING")
+    field(CALC, "A || B")
+    field(FLNK, "$(PRIMARY):$(MICRO):$(UNIT):RTM_MOTR_ON")
+    field(ASG,  "Internal")
+}
+
+record(bi, "$(PRIMARY):$(MICRO):$(UNIT):RTM_MOTR_ON")
+{
+    field(DESC, "Motor Running")
+    field(INP,  "$(PRIMARY):$(MICRO):$(UNIT):RTM_MOTR_ON_CALC")
+    field(ZNAM, "Off")
+    field(ONAM, "Running")
+    field(FLNK, "$(PRIMARY):$(MICRO):$(UNIT):RTM_SLED_TUNED_CALC")
+    info(autosaveFields, "DESC ZNAM ONAM ZSV OSV")
+}
+
+record(calc, "$(PRIMARY):$(MICRO):$(UNIT):RTM_SLED_TUNED_CALC")
+{
+    field(DESC, "Calculate SLED tune status")
+    field(INPA, "$(PRIMARY):$(MICRO):$(UNIT):RTM_LOWER_TUNED")
+    field(INPB, "$(PRIMARY):$(MICRO):$(UNIT):RTM_UPPER_TUNED")
+    field(INPC, "$(PRIMARY):$(MICRO):$(UNIT):RTM_MOTR_NOT_TUNED")
+    field(INPD, "$(PRIMARY):$(MICRO):$(UNIT):RTM_LOWER_DETUNED")
+    field(INPE, "$(PRIMARY):$(MICRO):$(UNIT):RTM_UPPER_DETUNED")
+    field(INPF, "$(PRIMARY):$(MICRO):$(UNIT):RTM_MOTR_NOT_DETUNED")
+    field(INPG, "$(PRIMARY):$(MICRO):$(UNIT):RTM_MOTR_ON")
+    field(CALC, "A && B && !C && !D && !E && F && !G")
+    field(FLNK, "$(PRIMARY):$(MICRO):$(UNIT):RTM_SLED_TUNED")
+    field(ASG,  "Internal")
+}
+
+record(bi, "$(PRIMARY):$(MICRO):$(UNIT):RTM_SLED_TUNED")
+{
+    field(DESC, "SLED tune status")
+    field(INP,  "$(PRIMARY):$(MICRO):$(UNIT):RTM_SLED_TUNED_CALC")
+    field(ZNAM, "No")
+    field(ONAM, "Yes")
+    field(FLNK, "$(PRIMARY):$(MICRO):$(UNIT):RTM_SLED_DETUNED_CALC")
+    info(autosaveFields, "DESC ZNAM ONAM ZSV OSV")
+}
+
+record(calc, "$(PRIMARY):$(MICRO):$(UNIT):RTM_SLED_DETUNED_CALC")
+{
+    field(DESC, "Calculate SLED detune status")
+    field(INPA, "$(PRIMARY):$(MICRO):$(UNIT):RTM_LOWER_TUNED")
+    field(INPB, "$(PRIMARY):$(MICRO):$(UNIT):RTM_UPPER_TUNED")
+    field(INPC, "$(PRIMARY):$(MICRO):$(UNIT):RTM_MOTR_NOT_TUNED")
+    field(INPD, "$(PRIMARY):$(MICRO):$(UNIT):RTM_LOWER_DETUNED")
+    field(INPE, "$(PRIMARY):$(MICRO):$(UNIT):RTM_UPPER_DETUNED")
+    field(INPF, "$(PRIMARY):$(MICRO):$(UNIT):RTM_MOTR_NOT_DETUNED")
+    field(INPG, "$(PRIMARY):$(MICRO):$(UNIT):RTM_MOTR_ON")
+    field(CALC, "!A && !B && C && D && E && !F && !G")
+    field(FLNK, "$(PRIMARY):$(MICRO):$(UNIT):RTM_SLED_DETUNED")
+    field(ASG,  "Internal")
+}
+
+record(bi, "$(PRIMARY):$(MICRO):$(UNIT):RTM_SLED_DETUNED")
+{
+    field(DESC, "SLED detune status")
+    field(INP,  "$(PRIMARY):$(MICRO):$(UNIT):RTM_SLED_DETUNED_CALC")
+    field(ZNAM, "No")
+    field(ONAM, "Yes")
+    field(FLNK, "$(PRIMARY):$(MICRO):$(UNIT):RTM_SLED_SUMY_CALC")
+    info(autosaveFields, "DESC ZNAM ONAM ZSV OSV")
+}
+
+record(calc, "$(PRIMARY):$(MICRO):$(UNIT):RTM_SLED_SUMY_CALC")
+{
+    field(DESC, "Calculate SLED summary")
+    field(INPA, "$(PRIMARY):$(MICRO):$(UNIT):RTM_SLED_TUNED")
+    field(INPB, "$(PRIMARY):$(MICRO):$(UNIT):RTM_SLED_DETUNED")
+    field(CALC, "!(A || B)")
+    field(FLNK, "$(PRIMARY):$(MICRO):$(UNIT):RTM_SLED_SUMY")
+    field(ASG,  "Internal")
+}
+
+record(bi, "$(PRIMARY):$(MICRO):$(UNIT):RTM_SLED_SUMY")
+{
+    field(DESC, "SLED summary")
+    field(INP,  "$(PRIMARY):$(MICRO):$(UNIT):RTM_SLED_SUMY_CALC")
+    field(ZNAM, "OK")
+    field(ONAM, "Fault")
+    field(OSV,  "MAJOR")
+    field(FLNK, "$(PRIMARY):$(MICRO):$(UNIT):RTM_SLED_SML_CALC")
+    info(autosaveFields, "DESC ZNAM ONAM ZSV OSV")
+}
+
+record(calc, "$(PRIMARY):$(MICRO):$(UNIT):RTM_SLED_SML_CALC")
+{
+    field(DESC, "Calculate SLED SML")
+    field(INPA, "$(PRIMARY):$(MICRO):$(UNIT):RTM_MOTR_NOT_TUNED")
+    field(INPB, "$(PRIMARY):$(MICRO):$(UNIT):RTM_MOTR_NOT_DETUNED")
+    field(CALC, "!(A || B)")
+    field(FLNK, "$(PRIMARY):$(MICRO):$(UNIT):RTM_SLED_SML")
+    field(ASG,  "Internal")
+}
+
+record(bi, "$(PRIMARY):$(MICRO):$(UNIT):RTM_SLED_SML")
+{
+    field(DESC, "SLED SML")
+    field(INP,  "$(PRIMARY):$(MICRO):$(UNIT):RTM_SLED_SML_CALC")
+    field(ZNAM, "OK")
+    field(ONAM, "Fault")
+    field(OSV,  "MAJOR")
+    field(FLNK, "$(PRIMARY):$(MICRO):$(UNIT):RTM_FAULTSUMY_CALC")
+    info(autosaveFields, "DESC ZNAM ONAM ZSV OSV")
+}
+
+record(calc, "$(PRIMARY):$(MICRO):$(UNIT):RTM_FAULTSUMY_CALC")
+{
+    field(DESC, "Calculate RTM Fault Summary")
+    field(INPA, "$(PRIMARY):$(MICRO):$(UNIT):RTM_VOLT_OVER")
+    field(INPB, "$(PRIMARY):$(MICRO):$(UNIT):RTM_CURR_OVER")
+    field(INPC, "$(PRIMARY):$(MICRO):$(UNIT):RTM_FP_OVER")
+    field(INPD, "$(PRIMARY):$(MICRO):$(UNIT):RTM_RP_OVER")
+    field(INPE, "$(PRIMARY):$(MICRO):$(UNIT):RTM_SLED_SUMY")
+    field(CALC, "A || B || C || D || E")
+    field(FLNK, "$(PRIMARY):$(MICRO):$(UNIT):RTM_FAULTSUMY")
+    field(ASG,  "Internal")
+}
+
+record(bi, "$(PRIMARY):$(MICRO):$(UNIT):RTM_FAULTSUMY")
+{
+    field(DESC, "RTM Fault Summary")
+    field(INP,  "$(PRIMARY):$(MICRO):$(UNIT):RTM_FAULTSUMY_CALC")
+    field(ZNAM, "OK")
+    field(ONAM, "Fault")
+    field(OSV,  "MAJOR")
+    field(FLNK, "$(PRIMARY):$(MICRO):$(UNIT):SLED_CALC")
+    info(autosaveFields, "DESC ZNAM ONAM ZSV OSV")
+}
+
+record(calcout, "$(PRIMARY):$(MICRO):$(UNIT):SLED_CALC") {
+    field(DESC, "Calculate SLED status")
+    field(INPA, "$(PRIMARY):$(MICRO):$(UNIT):RTM_SLED_TUNED")
+    field(INPB, "$(PRIMARY):$(MICRO):$(UNIT):RTM_SLED_DETUNED")
+    field(CALC, "A = B ? 2 : A")
+    field(ASG,  "Internal")
+    field(OOPT, "On Change")
+    field(OUT,  "$(PRIMARY):$(MICRO):$(UNIT):SLED PP")
+}
+
+record(mbbo, "$(PRIMARY):$(MICRO):$(UNIT):SLED") {
+    field(DESC, "SLED Status")
+    field(ZRVL, "0")
+    field(ONVL, "1")
+    field(TWVL, "2")
+    field(ZRST, "DETUNED")
+    field(ONST, "TUNED")
+    field(TWST, "Inconsistent")
+    field(ZRSV, "NO_ALARM")
+    field(ONSV, "NO_ALARM")
+    field(TWSV, "MAJOR")
+    field(FLNK, "$(PRIMARY):$(MICRO):$(UNIT):SLEDTS")
+}
+
+record(stringin, "$(PRIMARY):$(MICRO):$(UNIT):SLEDTS") {
+    field(DESC, "SLED Time Stamp")
+    field(DTYP, "Soft Timestamp")
+    field(VAL, "Unknown")
+    field(INP, "@%m/%d/%y %H:%M:%S")
+    field(PINI, "YES")
+    field(ASG, "Internal")
+    info(autosaveFields, "VAL")
+}
+
+record(bo, "$(PRIMARY):$(MICRO):$(UNIT):SLEDDES")
+{
+    field(DESC, "Desired SLED Status")
+    field(DTYP, "asynInt32")
+    field(VAL,  "1")
+    field(OUT,  "@asyn($(PORT),0) rtmDesiredSled")
+    field(ZNAM, "DETUNE Requested")
+    field(ONAM, "TUNE Requested")
+    info(autosaveFields, "VAL")
+}
+
+record(stringin, "$(PRIMARY):$(MICRO):$(UNIT):SLEDDESTS") {
+    field(DESC, "SLEDDES Time Stamp")
+    field(DTYP, "Soft Timestamp")
+    field(VAL, "Unknown")
+    field(INP, "@%m/%d/%y %H:%M:%S")
+    field(PINI, "YES")
+    field(ASG, "Internal")
+    info(autosaveFields, "VAL")
+}
+
+record(bi, "$(PRIMARY):$(MICRO):$(UNIT):RTM_FAULTOUT")
+{
+    field(DESC, "RTM Fault Status")
+    field(DTYP, "asynInt32")
+    field(INP,  "@asyn($(PORT),0) rtmFaultOut")
+    field(SCAN, "I/O Intr")
+    field(ZNAM, "OK")
+    field(ONAM, "Fault")
+    field(ZSV,  "NO_ALARM")
+    field(OSV,  "MAJOR")
+    field(TSE,  "-2")
+}
+
+record(calcout, "$(PRIMARY):$(MICRO):$(UNIT):RTM_FAULTCOUNT_CALC")
+{
+    field(DESC, "Calculate RTM recent faults")
+    field(INPA, "$(PRIMARY):$(MICRO):$(UNIT):RTM_FAULTOUT CPP")
+    field(INPB, "$(PRIMARY):$(MICRO):$(UNIT):RTM_FAULTCOUNT")
+    field(CALC, "A + B")
+    field(OUT,  "$(PRIMARY):$(MICRO):$(UNIT):RTM_FAULTCOUNT PP")
+    field(ASG,  "Internal")
+}
+
+record(longout, "$(PRIMARY):$(MICRO):$(UNIT):RTM_FAULTCOUNT")
+{
+    field(PINI, "YES")
+    field(DESC, "RTM recent faults counter")
+    field(HSV,  "MAJOR")
+}
+
+record(longout, "$(PRIMARY):$(MICRO):$(UNIT):RTM_FAULTCOUNT_MAX")
+{
+    field(PINI, "YES")
+    field(DESC, "Max number of recent RTM faults")
+    field(OUT,  "$(PRIMARY):$(MICRO):$(UNIT):RTM_FAULTCOUNT.HIGH")
+    field(VAL,  "3")
+    info(autosaveFields, "VAL")
+}
+
+record(longout, "$(PRIMARY):$(MICRO):$(UNIT):RTM_FAULTCOUNT_PERIOD")
+{
+    field(PINI, "YES")
+    field(DESC, "Period for recent RTM faults")
+    field(EGU,  "seconds")
+    field(VAL,  "3")
+    info(autosaveFields, "VAL")
+}
+
+record(bi, "$(PRIMARY):$(MICRO):$(UNIT):RTM_ADCLOCK")
+{
+    field(DESC, "RTM ADC Lock Status")
+    field(DTYP, "asynInt32")
+    field(INP,  "@asyn($(PORT),0) rtmAdcLocked")
+    field(SCAN, "I/O Intr")
+    field(ZNAM, "Unlocked")
+    field(ONAM, "Locked")
+    field(TSE,  "-2")
+}
+
+record(ai, "$(PRIMARY):$(MICRO):$(UNIT):RE_ILK_RAW")
+{
+    field(DESC, "Reflected Power threshold readback")
+    field(DTYP, "asynFloat64")
+    field(INP,  "@asyn($(PORT),0) RefPower_AdcIn")
+    field(SCAN, "I/O Intr")
+    field(TSE,  "-2")
+    field(PREC, "6")
+    field(EGU,  "%")
+    field(FLNK, "$(PRIMARY):$(MICRO):$(UNIT):RE_ILK")
+    field(HHSV, "MAJOR")
+    field(HSV,  "MINOR")
+    field(LSV,  "MINOR")
+    field(LLSV, "MAJOR")
+    info(autosaveFields, "DESC LOLO LOW HIGH HIHI")
+}
+
+record(ao, "$(PRIMARY):$(MICRO):$(UNIT):RE_ILK_SCALE") {
+    field(DESC, "Reflected Power Interlock scale")
+    field(PREC, "3")
+    field(ASG, "KLYS_MAINT")
+    field(VAL,  "1")
+    info(autosaveFields, "VAL")
+}
+
+# Convert from raw % to MW
+record(calc, "$(PRIMARY):$(MICRO):$(UNIT):RE_ILK")
+{
+    field(DESC, "Reflected Power threshold readback")
+    field(PREC, "6")
+    field(EGU,  "MW")
+    field(INPA, "$(PRIMARY):$(MICRO):$(UNIT):RE_ILK_RAW")
+    field(INPB, "$(PRIMARY):$(MICRO):$(UNIT):RE_RTM_SCALE")
+    field(INPC, "$(PRIMARY):$(MICRO):$(UNIT):RE_ILK_SCALE")
+    field(CALC, "(A/100)*B*C")
+    field(HHSV, "MAJOR")
+    field(HSV,  "MINOR")
+    field(LSV,  "MINOR")
+    field(LLSV, "MAJOR")
+    field(TSEL, "$(PRIMARY):$(MICRO):$(UNIT):RE_ILK_RAW.TIME")
+    info(autosaveFields, "DESC LOLO LOW HIGH HIHI")
+}
+
+record(ai, "$(PRIMARY):$(MICRO):$(UNIT):BC_ILK_RAW")
+{
+    field(DESC, "Beam Current threshold readback")
+    field(DTYP, "asynFloat64")
+    field(INP,  "@asyn($(PORT),0) BeamCurrent_AdcIn")
+    field(SCAN, "I/O Intr")
+    field(TSE,  "-2")
+    field(PREC, "6")
+    field(EGU,  "%")
+    field(FLNK, "$(PRIMARY):$(MICRO):$(UNIT):BC_ILK")
+    field(HHSV, "MAJOR")
+    field(HSV,  "MINOR")
+    field(LSV,  "MINOR")
+    field(LLSV, "MAJOR")
+    info(autosaveFields, "DESC LOLO LOW HIGH HIHI")
+}
+
+record(ao, "$(PRIMARY):$(MICRO):$(UNIT):BC_ILK_SCALE") {
+    field(DESC, "Beam Current Interlock scale")
+    field(PREC, "3")
+    field(ASG, "KLYS_MAINT")
+    field(VAL,  "1")
+    info(autosaveFields, "VAL")
+}
+
+# Convert from raw % to A
+record(calc, "$(PRIMARY):$(MICRO):$(UNIT):BC_ILK")
+{
+    field(DESC, "Beam Current threshold readback")
+    field(PREC, "6")
+    field(EGU,  "A")
+    field(INPA, "$(PRIMARY):$(MICRO):$(UNIT):BC_ILK_RAW")
+    field(INPB, "$(PRIMARY):$(MICRO):$(UNIT):BC_RTM_SCALE")
+    field(INPC, "$(PRIMARY):$(MICRO):$(UNIT):BC_ILK_SCALE")
+    field(CALC, "(A/100)*B*C")
+    field(HHSV, "MAJOR")
+    field(HSV,  "MINOR")
+    field(LSV,  "MINOR")
+    field(LLSV, "MAJOR")
+    field(TSEL, "$(PRIMARY):$(MICRO):$(UNIT):BC_ILK_RAW.TIME")
+    info(autosaveFields, "DESC LOLO LOW HIGH HIHI")
+}
+
+record(ai, "$(PRIMARY):$(MICRO):$(UNIT):BV_ILK_RAW")
+{
+    field(DESC, "Beam Voltage threshold readback")
+    field(DTYP, "asynFloat64")
+    field(INP,  "@asyn($(PORT),0) BeamVoltage_AdcIn")
+    field(SCAN, "I/O Intr")
+    field(TSE,  "-2")
+    field(PREC, "6")
+    field(EGU,  "%")
+    field(FLNK, "$(PRIMARY):$(MICRO):$(UNIT):BV_ILK")
+    field(HHSV, "MAJOR")
+    field(HSV,  "MINOR")
+    field(LSV,  "MINOR")
+    field(LLSV, "MAJOR")
+    info(autosaveFields, "DESC LOLO LOW HIGH HIHI")
+}
+
+record(ao, "$(PRIMARY):$(MICRO):$(UNIT):BV_ILK_SCALE") {
+    field(DESC, "Beam Volts Interlock scale")
+    field(PREC, "3")
+    field(ASG, "KLYS_MAINT")
+    field(VAL, "1")
+    info(autosaveFields, "VAL")
+}
+
+# Convert from raw % to kV
+record(calc, "$(PRIMARY):$(MICRO):$(UNIT):BV_ILK")
+{
+    field(DESC, "Beam Voltage threshold readback")
+    field(PREC, "6")
+    field(EGU,  "kV")
+    field(INPA, "$(PRIMARY):$(MICRO):$(UNIT):BV_ILK_RAW")
+    field(INPB, "$(PRIMARY):$(MICRO):$(UNIT):BV_RTM_SCALE")
+    field(INPC, "$(PRIMARY):$(MICRO):$(UNIT):BV_ILK_SCALE")
+    field(CALC, "(A/100)*B*C")
+    field(HHSV, "MAJOR")
+    field(HSV,  "MINOR")
+    field(LSV,  "MINOR")
+    field(LLSV, "MAJOR")
+    field(TSEL, "$(PRIMARY):$(MICRO):$(UNIT):BV_ILK_RAW.TIME")
+    info(autosaveFields, "DESC LOLO LOW HIGH HIHI")
+}
+
+record(ao, "$(PRIMARY):$(MICRO):$(UNIT):SET_RE_ILK")
+{
+    field(DESC, "Set threshold for Reflected Power")
+    field(ASG,  "KLYS_MAINT")
+    field(EGU,  "MW")
+    field(FLNK, "$(PRIMARY):$(MICRO):$(UNIT):SET_RE_ILK_CALC")
+    field(HHSV, "MAJOR")
+    field(HSV,  "MINOR")
+    field(LSV,  "MINOR")
+    field(LLSV, "MAJOR")
+    info(autosaveFields, "VAL DESC LOLO LOW HIGH HIHI")
+}
+
+# Conversion from MW to raw %
+record(calcout, "$(PRIMARY):$(MICRO):$(UNIT):SET_RE_ILK_CALC")
+{
+    field(INPA, "$(PRIMARY):$(MICRO):$(UNIT):SET_RE_ILK")
+    field(INPB, "$(PRIMARY):$(MICRO):$(UNIT):RE_RTM_SCALE")
+    field(INPC, "$(PRIMARY):$(MICRO):$(UNIT):RE_ILK_SCALE")
+    field(CALC, "100 * A / (B*C)")
+    field(OUT,  "$(PRIMARY):$(MICRO):$(UNIT):SET_RE_ILK_RAW PP")
+    field(ASG,  "Internal")
+}
+
+record(ao, "$(PRIMARY):$(MICRO):$(UNIT):SET_RE_ILK_RAW")
+{
+    field(DESC, "Set threshold for Reflected Power")
+    field(ASG,  "KLYS_MAINT")
+    field(EGU,  "%")
+    field(PINI, "YES")
+    field(DTYP, "asynFloat64")
+    field(OUT,  "@asyn($(PORT),0) rtmSetRefPower")
+    field(PREC, "3")
+    field(DRVL, "10")
+    field(DRVH, "90")
+    field(LOPR, "10")
+    field(HOPR, "90")
+    field(HHSV, "MAJOR")
+    field(HSV,  "MINOR")
+    field(LSV,  "MINOR")
+    field(LLSV, "MAJOR")
+    info(autosaveFields, "VAL DESC LOLO LOW HIGH HIHI")
+}
+
+record(ao, "$(PRIMARY):$(MICRO):$(UNIT):SET_BC_ILK")
+{
+    field(DESC, "Set threshold for Beam Current")
+    field(ASG,  "KLYS_MAINT")
+    field(EGU,  "A")
+    field(FLNK, "$(PRIMARY):$(MICRO):$(UNIT):SET_BC_ILK_CALC")
+    field(HHSV, "MAJOR")
+    field(HSV,  "MINOR")
+    field(LSV,  "MINOR")
+    field(LLSV, "MAJOR")
+    info(autosaveFields, "VAL DESC LOLO LOW HIGH HIHI")
+}
+
+# Convert from Amps to raw %
+record(calcout, "$(PRIMARY):$(MICRO):$(UNIT):SET_BC_ILK_CALC")
+{
+    field(INPA, "$(PRIMARY):$(MICRO):$(UNIT):SET_BC_ILK")
+    field(INPB, "$(PRIMARY):$(MICRO):$(UNIT):BC_RTM_SCALE")
+    field(INPC, "$(PRIMARY):$(MICRO):$(UNIT):BC_ILK_SCALE")
+    field(CALC, "100 * A / (B*C)")
+    field(OUT,  "$(PRIMARY):$(MICRO):$(UNIT):SET_BC_ILK_RAW PP")
+    field(ASG,  "Internal")
+}
+
+record(ao, "$(PRIMARY):$(MICRO):$(UNIT):SET_BC_ILK_RAW")
+{
+    field(DESC, "Set threshold for Beam Current")
+    field(ASG,  "KLYS_MAINT")
+    field(EGU,  "%")
+    field(PINI, "YES")
+    field(DTYP, "asynFloat64")
+    field(OUT,  "@asyn($(PORT),0) rtmSetBeamCurrent")
+    field(PREC, "3")
+    field(DRVL, "10")
+    field(DRVH, "90")
+    field(LOPR, "10")
+    field(HOPR, "90")
+    field(HHSV, "MAJOR")
+    field(HSV,  "MINOR")
+    field(LSV,  "MINOR")
+    field(LLSV, "MAJOR")
+    info(autosaveFields, "VAL DESC LOLO LOW HIGH HIHI")
+}
+
+record(ao, "$(PRIMARY):$(MICRO):$(UNIT):SET_BV_ILK")
+{
+    field(DESC, "Set threshold for Beam Voltage")
+    field(ASG,  "KLYS_MAINT")
+    field(EGU,  "kV")
+    field(FLNK, "$(PRIMARY):$(MICRO):$(UNIT):SET_BV_ILK_CALC")
+    field(HHSV, "MAJOR")
+    field(HSV,  "MINOR")
+    field(LSV,  "MINOR")
+    field(LLSV, "MAJOR")
+    info(autosaveFields, "VAL DESC LOLO LOW HIGH HIHI")
+}
+
+# Convert from kV to raw %
+record(calcout, "$(PRIMARY):$(MICRO):$(UNIT):SET_BV_ILK_CALC")
+{
+    field(INPA, "$(PRIMARY):$(MICRO):$(UNIT):SET_BV_ILK")
+    field(INPB, "$(PRIMARY):$(MICRO):$(UNIT):BV_RTM_SCALE")
+    field(INPC, "$(PRIMARY):$(MICRO):$(UNIT):BV_ILK_SCALE")
+    field(CALC, "100 * A / (B*C)")
+    field(OUT,  "$(PRIMARY):$(MICRO):$(UNIT):SET_BV_ILK_RAW PP")
+    field(ASG,  "Internal")
+}
+
+record(ao, "$(PRIMARY):$(MICRO):$(UNIT):SET_BV_ILK_RAW")
+{
+    field(DESC, "Set threshold for Beam Voltage")
+    field(ASG,  "KLYS_MAINT")
+    field(EGU,  "%")
+    field(PINI, "YES")
+    field(DTYP, "asynFloat64")
+    field(OUT,  "@asyn($(PORT),0) rtmSetBeamVoltage")
+    field(PREC, "3")
+    field(DRVL, "10")
+    field(DRVH, "90")
+    field(LOPR, "10")
+    field(HOPR, "90")
+    field(HHSV, "MAJOR")
+    field(HSV,  "MINOR")
+    field(LSV,  "MINOR")
+    field(LLSV, "MAJOR")
+    info(autosaveFields, "VAL DESC LOLO LOW HIGH HIHI")
+}
+

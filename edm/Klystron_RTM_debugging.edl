@@ -1,0 +1,3441 @@
+4 0 1
+beginScreenProperties
+major 4
+minor 0
+release 1
+x 100
+y 100
+w 1233
+h 924
+font "helvetica-medium-r-18.0"
+ctlFont "helvetica-medium-r-18.0"
+btnFont "helvetica-medium-r-18.0"
+fgColor index 14
+bgColor index 4
+textColor index 14
+ctlFgColor1 index 14
+ctlFgColor2 index 0
+ctlBgColor1 index 0
+ctlBgColor2 index 14
+topShadowColor index 0
+botShadowColor index 14
+endScreenProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 806
+y 275
+w 175
+h 95
+# Appearance
+border
+autoScaleBothDirections
+graphTitle "Beam current (Fault History n-3)"
+xLabel "us"
+fgColor index 14
+bgColor index 6
+gridColor index 14
+font "helvetica-medium-r-8.0"
+# Operating Modes
+plotMode "plotLastNPts"
+nPts 5
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "$(DEVICE):RTM_WF_X"
+}
+yPv {
+  0 "$(DEVICE):FAULTHIST3_RTM_BCURR_WF"
+}
+plotUpdateMode {
+  0 "xOrY"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 21
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 806
+y 376
+w 175
+h 95
+# Appearance
+border
+autoScaleBothDirections
+graphTitle "Beam Voltage (Fault History n-3)"
+xLabel "us"
+fgColor index 14
+bgColor index 6
+gridColor index 14
+font "helvetica-medium-r-8.0"
+# Operating Modes
+plotMode "plotLastNPts"
+nPts 5
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "$(DEVICE):RTM_WF_X"
+}
+yPv {
+  0 "$(DEVICE):FAULTHIST3_RTM_BVOLT_WF"
+}
+plotUpdateMode {
+  0 "xOrY"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 21
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 806
+y 573
+w 175
+h 95
+# Appearance
+border
+autoScaleBothDirections
+graphTitle "Reflect Power (Fault History n-3)"
+xLabel "us"
+fgColor index 14
+bgColor index 6
+gridColor index 14
+font "helvetica-medium-r-8.0"
+# Operating Modes
+plotMode "plotLastNPts"
+nPts 5
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "$(DEVICE):RTM_WF_X"
+}
+yPv {
+  0 "$(DEVICE):FAULTHIST3_RTM_RE_WF"
+}
+plotUpdateMode {
+  0 "xOrY"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 21
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 812
+y 256
+w 169
+h 12
+font "helvetica-bold-r-10.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "RTM Fast ADC / Fault History n-3"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 526
+y 18
+w 144
+h 12
+font "helvetica-medium-r-10.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Beam Current Under Threshold"
+}
+autoSize
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 852
+y 674
+w 80
+h 18
+controlPv "$(DEVICE):FAULTHIST3_WFPULSEID"
+font "helvetica-medium-r-10.0"
+fgColor index 15
+bgColor index 9
+precision 0
+fieldLen "12"
+nullColor index 0
+fastUpdate
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 687
+y 206
+w 81
+h 12
+font "helvetica-bold-r-10.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Reflected Power"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 692
+y 157
+w 70
+h 12
+font "helvetica-bold-r-10.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Beam Voltage"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 641
+y 139
+w 125
+h 12
+font "helvetica-bold-r-10.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Threshold: Beam Current"
+}
+autoSize
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 776
+y 135
+w 64
+h 18
+controlPv "$(DEVICE):BC_ILK_RAW"
+font "helvetica-medium-r-10.0"
+fgColor index 15
+bgColor index 9
+precision 2
+fieldLen "10"
+nullColor index 0
+fastUpdate
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 776
+y 202
+w 64
+h 18
+controlPv "$(DEVICE):RE_ILK_RAW"
+font "helvetica-medium-r-10.0"
+fgColor index 15
+bgColor index 9
+precision 2
+fieldLen "10"
+nullColor index 0
+fastUpdate
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 776
+y 157
+w 64
+h 18
+controlPv "$(DEVICE):BV_ILK_RAW"
+font "helvetica-medium-r-10.0"
+fgColor index 15
+bgColor index 9
+precision 2
+fieldLen "10"
+nullColor index 0
+fastUpdate
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 805
+y 677
+w 41
+h 12
+font "helvetica-medium-r-10.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Pulse ID:"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 617
+y 677
+w 41
+h 12
+font "helvetica-medium-r-10.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Pulse ID:"
+}
+autoSize
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 664
+y 674
+w 80
+h 18
+controlPv "$(DEVICE):FAULTHIST2_WFPULSEID"
+font "helvetica-medium-r-10.0"
+fgColor index 15
+bgColor index 9
+precision 0
+fieldLen "12"
+nullColor index 0
+fastUpdate
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 445
+y 675
+w 41
+h 12
+font "helvetica-medium-r-10.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Pulse ID:"
+}
+autoSize
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 492
+y 672
+w 80
+h 18
+controlPv "$(DEVICE):FAULTHIST1_WFPULSEID"
+font "helvetica-medium-r-10.0"
+fgColor index 15
+bgColor index 9
+precision 0
+fieldLen "12"
+nullColor index 0
+fastUpdate
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 270
+y 677
+w 41
+h 12
+font "helvetica-medium-r-10.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Pulse ID:"
+}
+autoSize
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 317
+y 674
+w 80
+h 18
+controlPv "$(DEVICE):FAULTHIST0_WFPULSEID"
+font "helvetica-medium-r-10.0"
+fgColor index 15
+bgColor index 9
+precision 0
+fieldLen "12"
+nullColor index 0
+fastUpdate
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 69
+y 679
+w 41
+h 12
+font "helvetica-medium-r-10.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Pulse ID:"
+}
+autoSize
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 116
+y 676
+w 80
+h 18
+controlPv "$(DEVICE):RTM_WFPULSEID"
+font "helvetica-medium-r-10.0"
+fgColor index 15
+bgColor index 9
+precision 0
+fieldLen "12"
+nullColor index 0
+fastUpdate
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 697
+y 102
+w 0
+h 7
+lineColor index 14
+fillColor index 0
+numPoints 2
+xPoints {
+  0 697
+  1 697
+}
+yPoints {
+  0 102
+  1 109
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 667
+y 81
+w 0
+h 25
+lineColor index 14
+fillColor index 0
+numPoints 2
+xPoints {
+  0 667
+  1 667
+}
+yPoints {
+  0 81
+  1 106
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 632
+y 65
+w 0
+h 44
+lineColor index 14
+fillColor index 0
+numPoints 2
+xPoints {
+  0 632
+  1 632
+}
+yPoints {
+  0 65
+  1 109
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 603
+y 46
+w 0
+h 61
+lineColor index 14
+fillColor index 0
+numPoints 2
+xPoints {
+  0 603
+  1 603
+}
+yPoints {
+  0 46
+  1 107
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 572
+y 37
+w 0
+h 70
+lineColor index 14
+fillColor index 0
+numPoints 2
+xPoints {
+  0 572
+  1 572
+}
+yPoints {
+  0 37
+  1 107
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 685
+y 87
+w 150
+h 12
+font "helvetica-medium-r-10.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Reflected Power Over Threshold"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 650
+y 69
+w 146
+h 12
+font "helvetica-medium-r-10.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Forward Power Over Threshold"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 621
+y 50
+w 137
+h 12
+font "helvetica-medium-r-10.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Beam Voltage Over Threshold"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 593
+y 33
+w 138
+h 12
+font "helvetica-medium-r-10.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Beam Current Over Threshold"
+}
+autoSize
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 543
+y 128
+w 0
+h 93
+lineColor index 14
+fillColor index 0
+numPoints 2
+xPoints {
+  0 543
+  1 543
+}
+yPoints {
+  0 128
+  1 221
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 496
+y 223
+w 72
+h 12
+font "helvetica-medium-r-10.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Modulator Fault"
+}
+autoSize
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 510
+y 131
+w 0
+h 72
+lineColor index 14
+fillColor index 0
+numPoints 2
+xPoints {
+  0 510
+  1 510
+}
+yPoints {
+  0 131
+  1 203
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 482
+y 129
+w 0
+h 62
+lineColor index 14
+fillColor index 0
+numPoints 2
+xPoints {
+  0 482
+  1 482
+}
+yPoints {
+  0 129
+  1 191
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 448
+y 128
+w 0
+h 48
+lineColor index 14
+fillColor index 0
+numPoints 2
+xPoints {
+  0 448
+  1 448
+}
+yPoints {
+  0 128
+  1 176
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 421
+y 128
+w 0
+h 37
+lineColor index 14
+fillColor index 0
+numPoints 2
+xPoints {
+  0 421
+  1 421
+}
+yPoints {
+  0 128
+  1 165
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 388
+y 132
+w 0
+h 17
+lineColor index 14
+fillColor index 0
+numPoints 2
+xPoints {
+  0 388
+  1 388
+}
+yPoints {
+  0 132
+  1 149
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 358
+y 133
+w 0
+h 10
+lineColor index 14
+fillColor index 0
+numPoints 2
+xPoints {
+  0 358
+  1 358
+}
+yPoints {
+  0 133
+  1 143
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 440
+y 207
+w 92
+h 12
+font "helvetica-medium-r-10.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Motor Not Detuned"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 427
+y 191
+w 71
+h 12
+font "helvetica-medium-r-10.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Upper Detuned"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 396
+y 178
+w 71
+h 12
+font "helvetica-medium-r-10.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Lower Detuned"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 360
+y 164
+w 80
+h 12
+font "helvetica-medium-r-10.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Motor Not Tuned"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 342
+y 152
+w 59
+h 12
+font "helvetica-medium-r-10.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Upper Tuned"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 313
+y 140
+w 59
+h 12
+font "helvetica-medium-r-10.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Lower Tuned"
+}
+autoSize
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 324
+y 98
+w 0
+h 10
+lineColor index 14
+fillColor index 0
+numPoints 2
+xPoints {
+  0 324
+  1 324
+}
+yPoints {
+  0 98
+  1 108
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 290
+y 78
+w 0
+h 33
+lineColor index 14
+fillColor index 0
+numPoints 2
+xPoints {
+  0 290
+  1 290
+}
+yPoints {
+  0 78
+  1 111
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 261
+y 62
+w 0
+h 48
+lineColor index 14
+fillColor index 0
+numPoints 2
+xPoints {
+  0 261
+  1 261
+}
+yPoints {
+  0 62
+  1 110
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 230
+y 50
+w 0
+h 61
+lineColor index 14
+fillColor index 0
+numPoints 2
+xPoints {
+  0 230
+  1 230
+}
+yPoints {
+  0 50
+  1 111
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 307
+y 80
+w 108
+h 12
+font "helvetica-medium-r-10.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Motor Tuning (running)"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 279
+y 62
+w 120
+h 12
+font "helvetica-medium-r-10.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Motor Detuning (running)"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 248
+y 46
+w 67
+h 12
+font "helvetica-medium-r-10.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Motor Timeout"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 210
+y 30
+w 96
+h 12
+font "helvetica-medium-r-10.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "RF ON (1:on, 0: off)"
+}
+autoSize
+endObjectProperties
+
+# (Byte)
+object ByteClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 215
+y 114
+w 29
+h 12
+controlPv "$(DEVICE):RTM_RF_ON"
+lineColor index 12
+onColor index 20
+offColor index 9
+numBits 1
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 36
+y 201
+w 85
+h 12
+font "helvetica-bold-r-10.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "ADC Lock Status"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 35
+y 163
+w 46
+h 12
+font "helvetica-bold-r-10.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Fault Out"
+}
+autoSize
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 120
+y 200
+w 87
+h 14
+controlPv "$(DEVICE):RTM_ADCLOCK"
+font "helvetica-bold-r-12.0"
+fgColor index 15
+bgColor index 8
+autoHeight
+limitsFromDb
+nullColor index 0
+useHexPrefix
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 121
+y 161
+w 87
+h 14
+controlPv "$(DEVICE):RTM_FAULTOUT"
+font "helvetica-bold-r-12.0"
+fgColor index 15
+bgColor index 8
+autoHeight
+limitsFromDb
+nullColor index 0
+useHexPrefix
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 635
+y 256
+w 169
+h 12
+font "helvetica-bold-r-10.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "RTM Fast ADC / Fault History n-2"
+}
+autoSize
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 629
+y 573
+w 175
+h 95
+# Appearance
+border
+autoScaleBothDirections
+graphTitle "Reflect Power (Fault History n-2)"
+xLabel "us"
+fgColor index 14
+bgColor index 6
+gridColor index 14
+font "helvetica-medium-r-8.0"
+# Operating Modes
+plotMode "plotLastNPts"
+nPts 5
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "$(DEVICE):RTM_WF_X"
+}
+yPv {
+  0 "$(DEVICE):FAULTHIST2_RTM_RE_WF"
+}
+plotUpdateMode {
+  0 "xOrY"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 21
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 629
+y 376
+w 175
+h 95
+# Appearance
+border
+autoScaleBothDirections
+graphTitle "Beam Voltage (Fault History n-2)"
+xLabel "us"
+fgColor index 14
+bgColor index 6
+gridColor index 14
+font "helvetica-medium-r-8.0"
+# Operating Modes
+plotMode "plotLastNPts"
+nPts 5
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "$(DEVICE):RTM_WF_X"
+}
+yPv {
+  0 "$(DEVICE):FAULTHIST2_RTM_BVOLT_WF"
+}
+plotUpdateMode {
+  0 "xOrY"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 21
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 629
+y 275
+w 175
+h 95
+# Appearance
+border
+autoScaleBothDirections
+graphTitle "Beam current (Fault History n-2)"
+xLabel "us"
+fgColor index 14
+bgColor index 6
+gridColor index 14
+font "helvetica-medium-r-8.0"
+# Operating Modes
+plotMode "plotLastNPts"
+nPts 5
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "$(DEVICE):RTM_WF_X"
+}
+yPv {
+  0 "$(DEVICE):FAULTHIST2_RTM_BCURR_WF"
+}
+plotUpdateMode {
+  0 "xOrY"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 21
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 456
+y 256
+w 169
+h 12
+font "helvetica-bold-r-10.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "RTM Fast ADC / Fault History n-1"
+}
+autoSize
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 450
+y 573
+w 175
+h 95
+# Appearance
+border
+autoScaleBothDirections
+graphTitle "Reflect Power (Fault History n-1)"
+xLabel "us"
+fgColor index 14
+bgColor index 6
+gridColor index 14
+font "helvetica-medium-r-8.0"
+# Operating Modes
+plotMode "plotLastNPts"
+nPts 5
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "$(DEVICE):RTM_WF_X"
+}
+yPv {
+  0 "$(DEVICE):FAULTHIST1_RTM_RE_WF"
+}
+plotUpdateMode {
+  0 "xOrY"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 21
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 450
+y 376
+w 175
+h 95
+# Appearance
+border
+autoScaleBothDirections
+graphTitle "Beam Voltage (Fault History n-1)"
+xLabel "us"
+fgColor index 14
+bgColor index 6
+gridColor index 14
+font "helvetica-medium-r-8.0"
+# Operating Modes
+plotMode "plotLastNPts"
+nPts 5
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "$(DEVICE):RTM_WF_X"
+}
+yPv {
+  0 "$(DEVICE):FAULTHIST1_RTM_BVOLT_WF"
+}
+plotUpdateMode {
+  0 "xOrY"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 21
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 450
+y 275
+w 175
+h 95
+# Appearance
+border
+autoScaleBothDirections
+graphTitle "Beam current (Fault History n-1)"
+xLabel "us"
+fgColor index 14
+bgColor index 6
+gridColor index 14
+font "helvetica-medium-r-8.0"
+# Operating Modes
+plotMode "plotLastNPts"
+nPts 5
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "$(DEVICE):RTM_WF_X"
+}
+yPv {
+  0 "$(DEVICE):FAULTHIST1_RTM_BCURR_WF"
+}
+plotUpdateMode {
+  0 "xOrY"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 21
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 277
+y 256
+w 158
+h 12
+font "helvetica-bold-r-10.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "RTM Fast ADC / Fault History 0"
+}
+autoSize
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 271
+y 573
+w 175
+h 95
+# Appearance
+border
+autoScaleBothDirections
+graphTitle "Reflect Power (Fault History 0)"
+xLabel "us"
+fgColor index 14
+bgColor index 6
+gridColor index 14
+font "helvetica-medium-r-8.0"
+# Operating Modes
+plotMode "plotLastNPts"
+nPts 5
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "$(DEVICE):RTM_WF_X"
+}
+yPv {
+  0 "$(DEVICE):FAULTHIST0_RTM_RE_WF"
+}
+plotUpdateMode {
+  0 "xOrY"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 21
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 271
+y 376
+w 175
+h 95
+# Appearance
+border
+autoScaleBothDirections
+graphTitle "Beam Voltage (Fault History 0)"
+xLabel "us"
+fgColor index 14
+bgColor index 6
+gridColor index 14
+font "helvetica-medium-r-8.0"
+# Operating Modes
+plotMode "plotLastNPts"
+nPts 5
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "$(DEVICE):RTM_WF_X"
+}
+yPv {
+  0 "$(DEVICE):FAULTHIST0_RTM_BVOLT_WF"
+}
+plotUpdateMode {
+  0 "xOrY"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 21
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 271
+y 275
+w 175
+h 95
+# Appearance
+border
+autoScaleBothDirections
+graphTitle "Beam current (Fault History 0)"
+xLabel "us"
+fgColor index 14
+bgColor index 6
+gridColor index 14
+font "helvetica-medium-r-8.0"
+# Operating Modes
+plotMode "plotLastNPts"
+nPts 5
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "$(DEVICE):RTM_WF_X"
+}
+yPv {
+  0 "$(DEVICE):FAULTHIST0_RTM_BCURR_WF"
+}
+plotUpdateMode {
+  0 "xOrY"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 21
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 55
+y 257
+w 75
+h 12
+font "helvetica-bold-r-10.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "RTM Fast ADC"
+}
+autoSize
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 27
+y 573
+w 175
+h 95
+# Appearance
+border
+autoScaleBothDirections
+graphTitle "Modulator Reflect Power"
+xLabel "us"
+fgColor index 14
+bgColor index 6
+gridColor index 14
+font "helvetica-medium-r-8.0"
+# Operating Modes
+plotMode "plotLastNPts"
+nPts 5
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "$(DEVICE):RTM_WF_X"
+}
+yPv {
+  0 "$(DEVICE):RTM_RE_WF"
+}
+plotUpdateMode {
+  0 "xOrY"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 21
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 27
+y 376
+w 175
+h 95
+# Appearance
+border
+autoScaleBothDirections
+graphTitle "Klystron Beam Voltage"
+xLabel "us"
+fgColor index 14
+bgColor index 6
+gridColor index 14
+font "helvetica-medium-r-8.0"
+# Operating Modes
+plotMode "plotLastNPts"
+nPts 5
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "$(DEVICE):RTM_WF_X"
+}
+yPv {
+  0 "$(DEVICE):RTM_BVOLT_WF"
+}
+plotUpdateMode {
+  0 "xOrY"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 21
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 27
+y 275
+w 175
+h 95
+# Appearance
+border
+autoScaleBothDirections
+graphTitle "Klystron Beam current"
+xLabel "us"
+fgColor index 14
+bgColor index 6
+gridColor index 14
+font "helvetica-medium-r-8.0"
+# Operating Modes
+plotMode "plotLastNPts"
+nPts 5
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "$(DEVICE):RTM_WF_X"
+}
+yPv {
+  0 "$(DEVICE):RTM_BCURR_WF"
+}
+plotUpdateMode {
+  0 "xOrY"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 21
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 55
+y 55
+w 108
+h 12
+font "helvetica-bold-r-10.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Clear Fault Command"
+}
+autoSize
+endObjectProperties
+
+# (Button)
+object activeButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 55
+y 69
+w 108
+h 34
+fgColor index 15
+onColor index 5
+offColor index 8
+inconsistentColor index 12
+topShadowColor index 4
+botShadowColor index 13
+controlPv "$(DEVICE):RTM_CLEARFAULT"
+indicatorPv "$(DEVICE):RTM_CLEARFAULT"
+onLabel "Done"
+offLabel "Clear Fault"
+labelType "literal"
+buttonType "push"
+3d
+font "helvetica-bold-r-10.0"
+objType "controls"
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 70
+y 123
+w 80
+h 16
+controlPv "$(DEVICE):RTM_STATUS_HEX"
+format "hex"
+font "helvetica-medium-r-10.0"
+fontAlign "right"
+fgColor index 15
+bgColor index 7
+autoHeight
+motifWidget
+precision 0
+fieldLen "4"
+nullColor index 0
+useHexPrefix
+newPos
+objType "controls"
+id "0"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 67
+y 109
+w 91
+h 12
+font "helvetica-bold-r-10.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "RTM Status (Hex)"
+}
+autoSize
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 849
+y 139
+w 64
+h 16
+controlPv "$(DEVICE):SET_BC_ILK_RAW"
+font "helvetica-medium-r-10.0"
+fgColor index 15
+bgColor index 8
+editable
+autoHeight
+motifWidget
+limitsFromDb
+fieldLen "4"
+nullColor index 0
+fastUpdate
+newPos
+objType "controls"
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 849
+y 161
+w 64
+h 16
+controlPv "$(DEVICE):SET_BV_ILK_RAW"
+font "helvetica-medium-r-10.0"
+fgColor index 15
+bgColor index 8
+editable
+autoHeight
+motifWidget
+limitsFromDb
+fieldLen "4"
+nullColor index 0
+fastUpdate
+newPos
+objType "controls"
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 848
+y 205
+w 64
+h 16
+controlPv "$(DEVICE):SET_RE_ILK_RAW"
+font "helvetica-medium-r-10.0"
+fgColor index 15
+bgColor index 8
+editable
+autoHeight
+motifWidget
+limitsFromDb
+fieldLen "4"
+nullColor index 0
+fastUpdate
+newPos
+objType "controls"
+endObjectProperties
+
+# (Choice Button)
+object activeChoiceButtonClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 576
+y 714
+w 160
+h 24
+fgColor index 15
+bgColor index 9
+selectColor index 5
+inconsistentColor index 14
+topShadowColor index 7
+botShadowColor index 14
+indicatorPv "$(DEVICE):FAULTSEQ_STATUS"
+font "helvetica-medium-r-10.0"
+orientation "horizontal"
+endObjectProperties
+
+# (Button)
+object activeButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 402
+y 716
+w 79
+h 24
+fgColor index 20
+onColor index 5
+offColor index 7
+inconsistentColor index 14
+topShadowColor index 8
+botShadowColor index 14
+controlPv "$(DEVICE):FAULTSEQ_RESET"
+indicatorPv "$(DEVICE):FAULTSEQ_RESET"
+onLabel "RESET"
+offLabel "RESET"
+labelType "literal"
+buttonType "push"
+3d
+font "helvetica-medium-r-12.0"
+objType "controls"
+endObjectProperties
+
+# (Choice Button)
+object activeChoiceButtonClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 299
+y 715
+w 90
+h 54
+fgColor index 15
+bgColor index 6
+selectColor index 5
+inconsistentColor index 14
+topShadowColor index 7
+botShadowColor index 14
+controlPv "$(DEVICE):FAULTSEQ_MODE"
+indicatorPv "$(DEVICE):FAULTSEQ_MODE"
+font "helvetica-medium-r-10.0"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 172
+y 725
+w 115
+h 12
+font "helvetica-bold-r-10.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Ramp rate (in seconds)"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 298
+y 701
+w 114
+h 12
+font "helvetica-bold-r-10.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Fault Recovery Control"
+}
+autoSize
+endObjectProperties
+
+# (Byte)
+object ByteClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 246
+y 114
+w 29
+h 12
+controlPv "$(DEVICE):RTM_MOTR_TIMEOUT"
+lineColor index 12
+onColor index 20
+offColor index 9
+numBits 1
+endObjectProperties
+
+# (Byte)
+object ByteClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 277
+y 114
+w 29
+h 12
+controlPv "$(DEVICE):RTM_MOTR_DETUNING"
+lineColor index 12
+onColor index 20
+offColor index 9
+numBits 1
+endObjectProperties
+
+# (Byte)
+object ByteClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 308
+y 114
+w 29
+h 12
+controlPv "$(DEVICE):RTM_MOTR_TUNING"
+lineColor index 12
+onColor index 20
+offColor index 9
+numBits 1
+endObjectProperties
+
+# (Byte)
+object ByteClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 339
+y 114
+w 29
+h 12
+controlPv "$(DEVICE):RTM_LOWER_TUNED"
+lineColor index 12
+onColor index 20
+offColor index 9
+numBits 1
+endObjectProperties
+
+# (Byte)
+object ByteClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 370
+y 114
+w 29
+h 12
+controlPv "$(DEVICE):RTM_UPPER_TUNED"
+lineColor index 12
+onColor index 20
+offColor index 9
+numBits 1
+endObjectProperties
+
+# (Byte)
+object ByteClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 401
+y 114
+w 29
+h 12
+controlPv "$(DEVICE):RTM_MOTR_NOT_TUNED"
+lineColor index 12
+onColor index 20
+offColor index 9
+numBits 1
+endObjectProperties
+
+# (Byte)
+object ByteClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 432
+y 114
+w 29
+h 12
+controlPv "$(DEVICE):RTM_LOWER_DETUNED"
+lineColor index 12
+onColor index 20
+offColor index 9
+numBits 1
+endObjectProperties
+
+# (Byte)
+object ByteClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 463
+y 114
+w 29
+h 12
+controlPv "$(DEVICE):RTM_UPPER_DETUNED"
+lineColor index 12
+onColor index 20
+offColor index 9
+numBits 1
+endObjectProperties
+
+# (Byte)
+object ByteClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 494
+y 114
+w 29
+h 12
+controlPv "$(DEVICE):RTM_MOTR_NOT_DETUNED"
+lineColor index 12
+onColor index 20
+offColor index 9
+numBits 1
+endObjectProperties
+
+# (Byte)
+object ByteClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 525
+y 114
+w 29
+h 12
+controlPv "$(DEVICE):RTM_MOD_FAULT"
+lineColor index 12
+onColor index 20
+offColor index 9
+numBits 1
+endObjectProperties
+
+# (Byte)
+object ByteClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 556
+y 114
+w 29
+h 12
+controlPv "$(DEVICE):RTM_CURR_UNDER"
+lineColor index 12
+onColor index 20
+offColor index 9
+numBits 1
+endObjectProperties
+
+# (Byte)
+object ByteClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 587
+y 114
+w 29
+h 12
+controlPv "$(DEVICE):RTM_CURR_OVER"
+lineColor index 12
+onColor index 20
+offColor index 9
+numBits 1
+endObjectProperties
+
+# (Byte)
+object ByteClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 618
+y 114
+w 29
+h 12
+controlPv "$(DEVICE):RTM_VOLT_OVER"
+lineColor index 12
+onColor index 20
+offColor index 9
+numBits 1
+endObjectProperties
+
+# (Byte)
+object ByteClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 649
+y 114
+w 29
+h 12
+controlPv "$(DEVICE):RTM_FP_OVER"
+lineColor index 12
+onColor index 20
+offColor index 9
+numBits 1
+endObjectProperties
+
+# (Byte)
+object ByteClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 680
+y 114
+w 29
+h 12
+controlPv "$(DEVICE):RTM_RP_OVER"
+lineColor index 12
+onColor index 20
+offColor index 9
+numBits 1
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 205
+y 291
+w 60
+h 18
+controlPv "$(DEVICE):RTM_BCURR_PK"
+font "helvetica-medium-r-10.0"
+fgColor index 15
+bgColor index 9
+precision 6
+fieldLen "12"
+nullColor index 0
+fastUpdate
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 205
+y 392
+w 60
+h 18
+controlPv "$(DEVICE):RTM_BVOLT_PK"
+font "helvetica-medium-r-10.0"
+fgColor index 15
+bgColor index 9
+precision 6
+fieldLen "12"
+nullColor index 0
+fastUpdate
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 205
+y 589
+w 60
+h 18
+controlPv "$(DEVICE):RTM_RE_PK"
+font "helvetica-medium-r-10.0"
+fgColor index 15
+bgColor index 9
+precision 6
+fieldLen "12"
+nullColor index 0
+fastUpdate
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 207
+y 275
+w 57
+h 12
+font "helvetica-bold-r-10.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Peak Value"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 207
+y 376
+w 57
+h 12
+font "helvetica-bold-r-10.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Peak Value"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 1001
+y 178
+w 76
+h 12
+font "helvetica-bold-r-10.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "SLED Summary"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 1000
+y 161
+w 70
+h 12
+font "helvetica-bold-r-10.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "SLED Detuned"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 1000
+y 141
+w 60
+h 12
+font "helvetica-bold-r-10.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "SLED Tuned"
+}
+autoSize
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 1085
+y 177
+w 87
+h 14
+controlPv "$(DEVICE):RTM_SLED_SUMY"
+font "helvetica-bold-r-12.0"
+fgColor index 15
+bgColor index 8
+autoHeight
+limitsFromDb
+nullColor index 0
+useHexPrefix
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 1085
+y 158
+w 87
+h 14
+controlPv "$(DEVICE):RTM_SLED_DETUNED"
+font "helvetica-bold-r-12.0"
+fgColor index 15
+bgColor index 8
+autoHeight
+limitsFromDb
+nullColor index 0
+useHexPrefix
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 1086
+y 139
+w 87
+h 14
+controlPv "$(DEVICE):RTM_SLED_TUNED"
+font "helvetica-bold-r-12.0"
+fgColor index 15
+bgColor index 8
+autoHeight
+limitsFromDb
+nullColor index 0
+useHexPrefix
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 1001
+y 197
+w 52
+h 12
+font "helvetica-bold-r-10.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "SLED SML"
+}
+autoSize
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 1085
+y 196
+w 87
+h 14
+controlPv "$(DEVICE):RTM_SLED_SML"
+font "helvetica-bold-r-12.0"
+fgColor index 15
+bgColor index 8
+autoHeight
+limitsFromDb
+nullColor index 0
+useHexPrefix
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 34
+y 225
+w 73
+h 12
+font "helvetica-bold-r-10.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Motor Running"
+}
+autoSize
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 120
+y 223
+w 87
+h 14
+controlPv "$(DEVICE):RTM_MOTR_ON"
+font "helvetica-bold-r-12.0"
+fgColor index 15
+bgColor index 8
+autoHeight
+limitsFromDb
+nullColor index 0
+useHexPrefix
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 34
+y 183
+w 74
+h 12
+font "helvetica-bold-r-10.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "RTM Summary"
+}
+autoSize
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 120
+y 181
+w 87
+h 14
+controlPv "$(DEVICE):RTM_FAULTSUMY"
+font "helvetica-bold-r-12.0"
+fgColor index 15
+bgColor index 8
+autoHeight
+limitsFromDb
+nullColor index 0
+useHexPrefix
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 207
+y 791
+w 64
+h 16
+controlPv "$(DEVICE):FAULTSEQ_DELAY"
+format "float"
+font "helvetica-medium-r-10.0"
+fgColor index 15
+bgColor index 8
+editable
+autoHeight
+motifWidget
+limitsFromDb
+fieldLen "4"
+nullColor index 0
+fastUpdate
+newPos
+objType "controls"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 172
+y 775
+w 146
+h 12
+font "helvetica-bold-r-10.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Fault clear delay (in seconds)"
+}
+autoSize
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 207
+y 840
+w 64
+h 16
+controlPv "$(DEVICE):BCUR_FLT_DELAY"
+format "float"
+font "helvetica-medium-r-10.0"
+fgColor index 15
+bgColor index 8
+editable
+autoHeight
+motifWidget
+limitsFromDb
+fieldLen "4"
+nullColor index 0
+fastUpdate
+newPos
+objType "controls"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 172
+y 824
+w 149
+h 12
+font "helvetica-bold-r-10.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "BCUR fault delay (in seconds)"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 345
+y 789
+w 52
+h 12
+font "helvetica-bold-r-10.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "BCUR Low"
+}
+autoSize
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 421
+y 787
+w 87
+h 14
+controlPv "$(DEVICE):BCUR_LOW"
+font "helvetica-bold-r-12.0"
+fgColor index 15
+bgColor index 8
+autoHeight
+limitsFromDb
+nullColor index 0
+useHexPrefix
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 344
+y 809
+w 69
+h 12
+font "helvetica-bold-r-10.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "BCUR Faulted"
+}
+autoSize
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 420
+y 807
+w 87
+h 14
+controlPv "$(DEVICE):BCUR_FLT"
+font "helvetica-bold-r-12.0"
+fgColor index 15
+bgColor index 8
+autoHeight
+limitsFromDb
+nullColor index 0
+useHexPrefix
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 547
+y 751
+w 191
+h 12
+font "helvetica-bold-r-10.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Recent RTM fault window (in seconds)"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 547
+y 801
+w 166
+h 12
+font "helvetica-bold-r-10.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Max allowable recent RTM faults"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 771
+y 752
+w 93
+h 12
+font "helvetica-bold-r-10.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Recent RTM faults"
+}
+autoSize
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 771
+y 776
+w 87
+h 14
+controlPv "$(DEVICE):RTM_FAULTCOUNT"
+font "helvetica-bold-r-12.0"
+fgColor index 15
+bgColor index 8
+autoHeight
+limitsFromDb
+nullColor index 0
+useHexPrefix
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 573
+y 821
+w 64
+h 16
+controlPv "$(DEVICE):RTM_FAULTCOUNT_MAX"
+format "float"
+font "helvetica-medium-r-10.0"
+fgColor index 15
+bgColor index 8
+editable
+autoHeight
+motifWidget
+limitsFromDb
+fieldLen "4"
+nullColor index 0
+fastUpdate
+newPos
+objType "controls"
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 575
+y 769
+w 64
+h 16
+controlPv "$(DEVICE):RTM_FAULTCOUNT_PERIOD"
+format "float"
+font "helvetica-medium-r-10.0"
+fgColor index 15
+bgColor index 8
+editable
+autoHeight
+motifWidget
+limitsFromDb
+fieldLen "4"
+nullColor index 0
+fastUpdate
+newPos
+objType "controls"
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 207
+y 745
+w 64
+h 16
+controlPv "$(DEVICE):FAULTSEQ_RAMPTIME"
+format "float"
+font "helvetica-medium-r-10.0"
+fgColor index 15
+bgColor index 8
+editable
+autoHeight
+motifWidget
+limitsFromDb
+fieldLen "4"
+nullColor index 0
+fastUpdate
+newPos
+objType "controls"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 6
+y 725
+w 155
+h 12
+font "helvetica-bold-r-10.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Feedback Timeout (in seconds)"
+}
+autoSize
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 51
+y 745
+w 64
+h 16
+controlPv "$(DEVICE):FAULTSEQ_FDBK_TIMEOUT"
+format "float"
+font "helvetica-medium-r-10.0"
+fgColor index 15
+bgColor index 8
+editable
+autoHeight
+motifWidget
+limitsFromDb
+fieldLen "4"
+nullColor index 0
+fastUpdate
+newPos
+objType "controls"
+endObjectProperties
+
+# (Choice Button)
+object activeChoiceButtonClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 38
+y 811
+w 90
+h 54
+fgColor index 15
+bgColor index 6
+selectColor index 5
+inconsistentColor index 14
+topShadowColor index 7
+botShadowColor index 14
+controlPv "$(DEVICE):FAULTSEQ_ENABLE_TIMEOUT"
+indicatorPv "$(DEVICE):FAULTSEQ_ENABLE_TIMEOUT"
+font "helvetica-medium-r-10.0"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 18
+y 797
+w 127
+h 12
+font "helvetica-bold-r-10.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Feedback Timeout Enable"
+}
+autoSize
+endObjectProperties
+
+# (Choice Button)
+object activeChoiceButtonClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 344
+y 858
+w 128
+h 26
+fgColor index 15
+bgColor index 6
+selectColor index 5
+inconsistentColor index 14
+topShadowColor index 7
+botShadowColor index 14
+controlPv "$(DEVICE):FAULTSEQ_MOVE_TRIG"
+indicatorPv "$(DEVICE):FAULTSEQ_MOVE_TRIG"
+font "helvetica-medium-r-10.0"
+orientation "horizontal"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 336
+y 844
+w 145
+h 12
+font "helvetica-bold-r-10.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Override triggers during fault"
+}
+autoSize
+endObjectProperties
+
+# (Choice Button)
+object activeChoiceButtonClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 504
+y 858
+w 128
+h 26
+fgColor index 15
+bgColor index 6
+selectColor index 5
+inconsistentColor index 14
+topShadowColor index 7
+botShadowColor index 14
+controlPv "$(DEVICE):FAULTSEQ_MOVE_FDBK"
+indicatorPv "$(DEVICE):FAULTSEQ_MOVE_FDBK"
+font "helvetica-medium-r-10.0"
+orientation "horizontal"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 493
+y 844
+w 151
+h 12
+font "helvetica-bold-r-10.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Override feedback during fault"
+}
+autoSize
+endObjectProperties
+

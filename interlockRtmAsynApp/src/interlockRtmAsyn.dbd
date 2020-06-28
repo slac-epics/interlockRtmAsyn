@@ -1,0 +1,3 @@
+registrar(interlockRtmAsynDriverRegister)
+driver(interlockRtmAsynDriver)
+

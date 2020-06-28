@@ -1,0 +1,144 @@
+record(bo, "$(PRIMARY):$(MICRO):$(UNIT):FAULTSEQ_RESET")
+{
+    field(DESC, "Reset interlock sequencer")
+    field(ZNAM, "Done")
+    field(ONAM, "Reset")
+    field(SCAN, "Passive")
+}
+
+record(mbbo, "$(PRIMARY):$(MICRO):$(UNIT):FAULTSEQ_STATUS")
+{
+    field(DESC, "Interlock Sequencer Status")
+    field(ZRVL, "0")
+    field(ONVL, "1")
+    field(TWVL, "2")
+    field(ZRST, "OK")
+    field(ONST, "Fault")
+    field(TWST, "Ramp Up")
+    field(ONSV, "MAJOR")
+    field(TWSV, "MINOR")
+    field(SCAN, "Passive")
+    info(autosaveFields, "VAL")
+}
+
+record(mbbo, "$(PRIMARY):$(MICRO):$(UNIT):FAULTSEQ_MODE")
+{
+    field(DESC, "Interlock Sequencer Mode")
+    field(ZRVL, "0")
+    field(ONVL, "1")
+    field(TWVL, "2")
+    field(ZRST, "Manual")
+    field(ONST, "Automatic")
+    field(TWST, "Bypass")
+    field(SCAN, "Passive")
+    info(autosaveFields, "VAL")
+}
+
+record(ao, "$(PRIMARY):$(MICRO):$(UNIT):FAULTSEQ_RAMPTIME")
+{
+    field(DESC, "time period for Ramping")
+    field(PREC, "1")
+    field(SCAN, "Passive")
+    field(HHSV, "MAJOR")
+    field(HSV,  "MINOR")
+    field(LSV,  "MINOR")
+    field(LLSV, "MAJOR")
+    info(autosaveFields, "VAL LOLO LOW HIGH HIHI")
+}
+
+record(ao, "$(PRIMARY):$(MICRO):$(UNIT):FAULTSEQ_DELAY")
+{
+    field(DESC, "time delay before fault clear")
+    field(PREC, "1")
+    field(SCAN, "Passive")
+    field(VAL,  "3")
+    field(DRVL, "0.1")
+    field(DRVH, "60")
+    field(LOPR, "0.1")
+    field(HOPR, "60")
+    field(HHSV, "MAJOR")
+    field(HSV,  "MINOR")
+    field(LSV,  "MINOR")
+    field(LLSV, "MAJOR")
+    info(autosaveFields, "VAL LOLO LOW HIGH HIHI")
+}
+
+record(ao, "$(PRIMARY):$(MICRO):$(UNIT):FAULTSEQ_FDBK_TIMEOUT")
+{
+    field(DESC, "time for phase feedback to recover")
+    field(PREC, "1")
+    field(SCAN, "Passive")
+    field(VAL,  "10")
+    field(DRVL, "0.1")
+    field(DRVH, "60")
+    field(LOPR, "0.1")
+    field(HOPR, "60")
+    field(HHSV, "MAJOR")
+    field(HSV,  "MINOR")
+    field(LSV,  "MINOR")
+    field(LLSV, "MAJOR")
+    info(autosaveFields, "VAL LOLO LOW HIGH HIHI")
+}
+
+record(bo, "$(PRIMARY):$(MICRO):$(UNIT):FAULTSEQ_ENABLE_TIMEOUT")
+{
+    field(DESC, "Enable faulted phase feedback timeout")
+    field(ZNAM, "Disable")
+    field(ONAM, "Enable")
+    field(VAL,  "1")
+    info(autosaveFields, "VAL ZSV OSV")
+}
+
+record(calc, "$(PRIMARY):$(MICRO):$(UNIT):FAULTSEQ_FDBK_WAIT")
+{
+    field(DESC, "wait for phase feedback to recover")
+    field(INPA, "$(PRIMARY):$(MICRO):$(UNIT):FAULTSEQ_ENABLE_TIMEOUT CPP")
+    field(INPB, "$(PRIMARY):$(MICRO):$(UNIT):PHASE_CONTROL CPP")
+    field(CALC, "A && B")
+    field(ASG,  "Internal")
+}
+
+record(bo, "$(PRIMARY):$(MICRO):$(UNIT):FAULTSEQ_MOVE_TRIG")
+{
+    field(DESC, "Move triggers to standby during fault")
+    field(ZNAM, "Disable")
+    field(ONAM, "Enable")
+    field(VAL,  "1")
+    info(autosaveFields, "VAL ZSV OSV")
+}
+
+record(bo, "$(PRIMARY):$(MICRO):$(UNIT):FAULTSEQ_MOVE_FDBK")
+{
+    field(DESC, "Override feedback during fault")
+    field(ZNAM, "Disable")
+    field(ONAM, "Enable")
+    field(VAL,  "1")
+    info(autosaveFields, "VAL ZSV OSV")
+}
+
+record(ao, "$(PRIMARY):$(MICRO):$(UNIT):BCUR_FLT_DELAY")
+{
+    field(DESC, "time delay before beamcurrent fault")
+    field(PREC, "1")
+    field(SCAN, "Passive")
+    field(VAL,  "3")
+    field(DRVL, "0.1")
+    field(DRVH, "60")
+    field(LOPR, "0.1")
+    field(HOPR, "60")
+    field(HHSV, "MAJOR")
+    field(HSV,  "MINOR")
+    field(LSV,  "MINOR")
+    field(LLSV, "MAJOR")
+    info(autosaveFields, "VAL LOLO LOW HIGH HIHI")
+}
+
+record(bi, "$(PRIMARY):$(MICRO):$(UNIT):BCUR_FLT")
+{
+    field(DESC, "Beamcurrent too low")
+    field(ZNAM, "OK")
+    field(ONAM, "Fault")
+    field(OSV, "MAJOR")
+    info(autosaveFields, "VAL")
+}
+

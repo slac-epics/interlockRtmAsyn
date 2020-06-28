@@ -1,0 +1,48 @@
+file rtmInterlock.db
+{
+    pattern { DUMMY }
+            { _DUMMY_ }
+}
+
+file rtmWaveform.db
+{
+    pattern {  SIZE, SLOW_FACTOR }
+            { "510",   "10"     }
+}
+
+file rtmFaultHistoryWaveform.db
+{
+    pattern {  HIST,  SIZE  }
+            {   "0",   "510" }
+            {   "1",   "510" }
+            {   "2",   "510" }
+            {   "3",   "510" }
+}
+
+file waveformTimeAxis.db
+{
+    pattern {  WF  ,  DESC                          ,  SIZE ,  FREQ   }
+#            { "RAW", "Raw waveform time axis"       , "9000", "357"   }
+#            { "PA" , "Phase/Ampl waveform time axis", "160" , "17.85" }
+            { "RTM", "RTM waveform time axis"       , "510" , "59.5"  }
+}
+
+
+#file rtmFaultCounters.db
+#{
+#    pattern { FAULT           }
+#            { "RTM_VOLT_OVER" }
+#            { "RTM_CURR_OVER" }
+#            { "RTM_RP_OVER"   }
+#            { "RTM_SLED_SUMY" }
+#            { "RTM_MOD_FAULT" }
+#}
+
+
+file rfInterlockSeq.db
+{
+    pattern {  }
+            {  }
+}
+
+
