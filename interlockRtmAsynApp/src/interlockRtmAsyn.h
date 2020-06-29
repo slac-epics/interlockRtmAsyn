@@ -44,6 +44,8 @@ class interlockRtmAsynDriver
 
         asynStatus writeInt32(asynUser *pasynUser, epicsInt32 value);
         asynStatus writeFloat64(asynUser *pasynUser, epicsFloat64 value);
+        asynStatus readInt32(asynUser *pasynUser, epicsInt32 *pvalue);
+        asynStatus readOctet(asynUser *pasynUser, char *pvalue, size_t maxChars, size_t *nActual, int *eomReason);
 
         void paramSetup(void);
         void getRtmInfo(void);
@@ -108,6 +110,15 @@ class interlockRtmAsynDriver
 #define FIRST_INTERLOCKRTM_PARAM     firstInterlockRtmParam
 #endif /* ASYN VERSION CHECK under 4.32 */
 
+        // rtm information
+        int p_rtmFirmwareVersion;         /* asynInt32 */
+        int p_rtmSystemId;                /* asynOctet */
+        int p_rtmSubType;                 /* asynOctet */
+        int p_rtmFirmwareDate;            /* asynOctet */
+        int p_rtmInterlockTaskCnt;        /* asynInt32 */
+        int p_rtmCurrentPulseId;          /* asynInt32 */
+        int p_rtmCurrentTimeSlot;         /* asynInt32 */
+        int p_rtmTimestampString;         /* asynOctete */
   
         // rtm interlock module     
         int p_rtmStatus;                  /* asynInt32 */
@@ -180,6 +191,14 @@ class interlockRtmAsynDriver
 #define NUM_INTERLOCKRTM_DET_PARAMS ((int)(&LAST_INTERLOCKRTM_PARAM - &FIRST_INTERLOCKRTM_PARAM-1))
 #endif /* asyn version check, under 4.32 */
 
+#define rtmFirmwareVersionString          "rtmFirmVer"
+#define rtmSystemIdString                 "rtmSysId"
+#define rtmSubTypeString                  "rtmSubType"
+#define rtmFirmwareDateString             "rtmFirmDate"
+#define rtmInterlockTaskCntString         "rtmTaskCnt"
+#define rtmCurrentPulseIdString           "rtmpId"
+#define rtmCurrentTimeSlotString          "rtmTS"
+#define rtmTimestampStringString          "rtmTString"
 
 #define rtmStatusString                    "rtmStatus"
 #define rtmFaultOutStatusString            "rtmFaultOut"

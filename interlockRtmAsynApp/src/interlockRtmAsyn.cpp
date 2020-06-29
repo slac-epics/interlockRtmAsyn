@@ -146,6 +146,17 @@ void interlockRtmAsynDriver::paramSetup(void)
 {
     char param_name[64];
 
+
+    // RTM Information
+    createParam(rtmFirmwareVersionString,  asynParamInt32, &p_rtmFirmwareVersion);
+    createParam(rtmSystemIdString,         asynParamOctet, &p_rtmSystemId);
+    createParam(rtmSubTypeString,          asynParamOctet, &p_rtmSubType);
+    createParam(rtmFirmwareDateString,     asynParamOctet, &p_rtmFirmwareDate);
+    createParam(rtmInterlockTaskCntString, asynParamInt32, &p_rtmInterlockTaskCnt);
+    createParam(rtmCurrentPulseIdString,   asynParamInt32, &p_rtmCurrentPulseId);
+    createParam(rtmCurrentTimeSlotString,  asynParamOctet, &p_rtmCurrentTimeSlot);
+    createParam(rtmTimestampStringString,  asynParamOctet, &p_rtmTimestampString);
+
     // RTM Interlock related
     
     createParam(rtmStatusString,  asynParamInt32, &p_rtmStatus);
@@ -309,6 +320,73 @@ asynStatus interlockRtmAsynDriver::writeFloat64(asynUser *pasynUser, epicsFloat6
     return status;
 }
 
+asynStatus interlockRtmAsynDriver::readInt32(asynUser *pasynUser, epicsInt32 *pvalue)
+{
+    int function = pasynUser->reason;
+    asynStatus status = asynSuccess;
+    const char * functionName = "readInt32";
+    epicsInt32 value = 0;
+
+
+    if(function == p_rtmInterlockTaskCnt) {
+        value = count;
+    } else if (function == p_rtmCurrentTimeSlot) {
+        value = current_ts;
+    } else if (function == p_rtmCurrentPulseId) {
+        value  = pulseid;
+    } else return status;
+
+
+    *pvalue = value;
+    
+    /* Do callback so higher layer see any changes */
+    //  status = (asynStatus) callParamCallbacks();
+    
+    if(status)
+        epicsSnprintf(pasynUser->errorMessage, pasynUser->errorMessageSize,
+                      "%s:%s: status=%d, function=%d, value=%d", 
+                      getDriverName(), functionName, status, function, value);
+    else
+        asynPrint(pasynUser, ASYN_TRACEIO_DRIVER,
+                  "%s:%s: function=%d, value=%d\n",
+                  getDriverName(), functionName, function, value);
+
+    return status;
+}
+
+
+asynStatus interlockRtmAsynDriver::readOctet(asynUser *pasynUser, char *pvalue, size_t maxChars, size_t *nActual, int *eomReason)
+{
+    int function = pasynUser->reason;
+    asynStatus status = asynSuccess;
+    const char *functionName = "readOctet";
+    char value[128];
+    value[0] = '\0';
+
+
+
+    if(function == p_rtmTimestampString) epicsTimeToStrftime(value, sizeof(value), "%Y/%m/%d %H:%M:%S.%09f", &time);
+    else return status;
+
+    
+    *nActual = strlen(value);
+    strcpy(pvalue, value);
+
+   /* Do callback so higher layer see any changes */
+   //  status = (asynStatus) callParamCallbacks();
+    
+    if(status)
+        epicsSnprintf(pasynUser->errorMessage, pasynUser->errorMessageSize,
+                      "%s:%s: status=%d, function=%d, value=%s\n", 
+                      getDriverName(), functionName, status, function, value);
+    else
+        asynPrint(pasynUser, ASYN_TRACEIO_DRIVER,
+                  "%s:%s: function=%d, value=%s\n",
+                  getDriverName(), functionName, function, value);
+
+    return status;
+}
+
 
 
 
@@ -318,6 +396,14 @@ void interlockRtmAsynDriver::getRtmInfo(void)
     fw->getRtmSystemId(rtmSystemId);
     fw->getRtmSubType(rtmSubType);
     fw->getRtmFirmwareDate(rtmFirmwareDate);
+
+    setIntegerParam(p_rtmFirmwareVersion, rtmFirmwareVersion);
+    setStringParam(p_rtmSystemId, rtmSystemId);
+    setStringParam(p_rtmSubType,  rtmSubType);
+    setStringParam(p_rtmFirmwareDate, rtmFirmwareDate);
+
+
+    callParamCallbacks();
 }
 
 

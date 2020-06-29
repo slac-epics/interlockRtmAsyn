@@ -1,3 +1,78 @@
+record(longin, "$(PRIMARY):$(MICRO):$(UNIT):RTM_FIRMVER")
+{
+    field(PINI, "YES")
+    field(DESC, "RTM Firmware Version")
+    field(DTYP, "asynInt32")
+    field(INP,  "@asyn($(PORT),0) rtmFirmVer")
+    field(SCAN, "I/O Intr")
+    info(autosaveFields, "VAL")
+}
+
+record(stringin, "$(PRIMARY):$(MICRO):$(UNIT):RTM_SYSID")
+{
+    field(PINI, "YES")
+    field(DESC, "RTM System ID")
+    field(DTYP, "asynOctetRead")
+    field(INP,  "@asyn($(PORT),0) rtmSysId")
+    field(SCAN, "I/O Intr")
+    info(autosaveFields, "VAL")
+}
+
+record(stringin, "$(PRIMARY):$(MICRO):$(UNIT):RTM_SUBTYPE")
+{
+    field(PINI, "YES")
+    field(DESC, "RTM SubType")
+    field(DTYP, "asynOctetRead")
+    field(INP,  "@asyn($(PORT),0) rtmSubType")
+    field(SCAN, "I/O Intr")
+    info(autosaveFields, "VAL")
+}
+
+record(stringin, "$(PRIMARY):$(MICRO):$(UNIT):RTM_FIRMDATE")
+{
+    field(PINI, "YES")
+    field(DESC, "RTM Firmware Date")
+    field(DTYP, "asynOctetRead")
+    field(INP,  "@asyn($(PORT),0) rtmFirmDate")
+    field(SCAN, "I/O Intr")
+    info(autosaveFields, "VAL")
+}
+
+
+record(stringin, "$(PRIMARY):$(MICRO):$(UNIT):RTM_TSTR")
+{
+    field(DESC, "RTM Timestamp String")
+    field(DTYP, "asynOctetRead")
+    field(INP,  "@asyn($(PORT),0) rtmTString")
+    field(SCAN, "1 second")
+}
+
+record(longin, "$(PRIMARY):$(MICRO):$(UNIT):RTM_TASKCNT")
+{
+    field(DESC, "RTM Interlock Task Count")
+    field(DTYP, "asynInt32")
+    field(INP,  "@asyn($(PORT),0) rtmTaskCnt")
+    field(SCAN, "1 second")
+}
+
+record(longin, "$(PRIMARY):$(MICRO):$(UNIT):RTM_PID")
+{
+    field(DESC, "RTM Current Pulse Id")
+    field(DTYP, "asynInt32")
+    field(INP,  "@asyn($(PORT),0) rtmpId")
+    field(SCAN, "1 second")
+}
+
+record(longin, "$(PRIMARY):$(MICRO):$(UNIT):RTM_TS")
+{
+    field(DESC, "RTM Current Time Slot")
+    field(DTYP, "asynInt32")
+    field(INP,  "@asyn($(PORT),0) rtmTS")
+    field(SCAN, "1 second")
+}
+
+
+
 record(bo,     "$(PRIMARY):$(MICRO):$(UNIT):RTM_CLEARFAULT")
 {
     field(DESC, "RTM Clear Fault")

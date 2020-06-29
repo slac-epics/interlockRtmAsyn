@@ -1,2 +1,6 @@
+R0.1.0     06-29-2020     Kukhee Kim
+                        - add firmware information PVs
+                          (version, date, type and more diagnostics)
+
 R0.0.0     06-28-2020     Kukhee Kim
                         - initial release   
