@@ -1,3 +1,6 @@
+R0.2.0     08-05-2020     Kukhee Kim
+                        - set HIGH filed to fault clear button to relase the button automatically
+
 R0.1.0     06-29-2020     Kukhee Kim
                         - add firmware information PVs
                           (version, date, type and more diagnostics)

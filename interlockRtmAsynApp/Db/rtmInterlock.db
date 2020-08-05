@@ -82,6 +82,7 @@ record(bo,     "$(PRIMARY):$(MICRO):$(UNIT):RTM_CLEARFAULT")
     field(SCAN, "Passive")
     field(ZNAM, "Done")
     field(ONAM, "Clear Fault")
+    field(HIGH, "1")
 }
 
 
