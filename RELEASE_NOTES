@@ -1,3 +1,6 @@
+R0.2.1     08-18-2020     Kukhee Kim
+                        - slow down display PV to 1Hz update rates
+
 R0.2.0     08-05-2020     Kukhee Kim
                         - set HIGH filed to fault clear button to relase the button automatically
 

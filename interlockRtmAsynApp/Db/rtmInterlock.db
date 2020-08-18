@@ -521,6 +521,18 @@ record(bi, "$(PRIMARY):$(MICRO):$(UNIT):RTM_ADCLOCK")
     field(TSE,  "-2")
 }
 
+
+
+record(ai, "$(PRIMARY):$(MICRO):$(UNIT):RE_ILK_RAW_SLOW")
+{
+    field(DESC, "Reflect Power threshold readback")
+    field(INP,  "$(PRIMARY):$(MICRO):$(UNIT):RE_ILK_RAW NPP MS")
+    field(SCAN, "1 second")
+    field(TSEL,  "$(PRIMARY):$(MICRO):$(UNIT):RE_ILK_RAW.TIME NPP NMS")
+    field(PREC, "6")
+    field(EGU,  "%")
+}
+
 record(ai, "$(PRIMARY):$(MICRO):$(UNIT):RE_ILK_RAW")
 {
     field(DESC, "Reflected Power threshold readback")
@@ -564,6 +576,19 @@ record(calc, "$(PRIMARY):$(MICRO):$(UNIT):RE_ILK")
     info(autosaveFields, "DESC LOLO LOW HIGH HIHI")
 }
 
+
+record(ai, "$(PRIMARY):$(MICRO):$(UNIT):BC_ILK_RAW_SLOW")
+{
+    field(DESC, "Beam Current threshold readback")
+    field(INP,  "$(PRIMARY):$(MICRO):$(UNIT):BC_ILK_RAW NPP MS")
+    field(SCAN, "1 second")
+    field(TSEL,  "$(PRIMARY):$(MICRO):$(UNIT):BC_ILK_RAW.TIME NPP NMS")
+    field(PREC, "6")
+    field(EGU,  "%")
+}
+
+
+
 record(ai, "$(PRIMARY):$(MICRO):$(UNIT):BC_ILK_RAW")
 {
     field(DESC, "Beam Current threshold readback")
@@ -605,6 +630,16 @@ record(calc, "$(PRIMARY):$(MICRO):$(UNIT):BC_ILK")
     field(LLSV, "MAJOR")
     field(TSEL, "$(PRIMARY):$(MICRO):$(UNIT):BC_ILK_RAW.TIME")
     info(autosaveFields, "DESC LOLO LOW HIGH HIHI")
+}
+
+record(ai, "$(PRIMARY):$(MICRO):$(UNIT):BV_ILK_RAW_SLOW")
+{
+    field(DESC, "Beam Voltage threshold readback")
+    field(INP,  "$(PRIMARY):$(MICRO):$(UNIT):BV_ILK_RAW NPP MS")
+    field(SCAN, "1 second")
+    field(TSEL,  "$(PRIMARY):$(MICRO):$(UNIT):BV_ILK_RAW.TIME NPP NMS")
+    field(PREC, "6")
+    field(EGU,  "%")
 }
 
 record(ai, "$(PRIMARY):$(MICRO):$(UNIT):BV_ILK_RAW")
