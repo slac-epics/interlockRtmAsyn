@@ -441,6 +441,7 @@ void interlockRtmAsynDriver::interlockTask(void *p)
    rtmStatus = rtmFaultOutStatus = rtmAdcLockedStatus= rtmRFOffStatus = 0xffffffff;
    ready     = true;
    
+   bool fault_print = true;  //debugging
    
    
     while(1) {
@@ -477,7 +478,23 @@ void interlockRtmAsynDriver::interlockTask(void *p)
         getRtmWaveforms();
         if(rtmFaultOutStatus) {  // 0 - no fault, 1 - fault
             takeRtmFaultHistory();
+
+            if(fault_print) { fault_print = false;
+            // test code
+            uint32_t  wp;
+            uint32_t  ts[0x8];
+            uint32_t  hist_iv[0x800];
+            uint32_t  hist_fr[0x800];
+            fw->getFaultHistoryBuffer(&wp, ts, hist_iv, hist_fr);
+            printf("wf: %8.8x\n", wp);
+            for(int i =0; i < 8; i++) printf("ts[%d]: %8.8x\n", i, ts[i]);
+
+            // for(int i = 0; i < 0x800; i ++) printf("data[%3.3x]:  %8.8x       %8.8x\n", i, hist_iv[i], hist_fr[i]);
+
+           }
+            
         }
+        else fault_print = true;
         
         
         getRtmThresholdReadout();
