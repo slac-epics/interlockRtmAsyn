@@ -63,7 +63,9 @@ class interlockRtmAsynDriver
         void setRtmRefcalRatio(double value);
         void setRtmDivrRatio(double value);
         void setRtmCurrRatio(double value);
-        void getRtmThresholdReadout(void);
+        void getRtmThresholdReadout(void);  // debugging
+
+        void pollStream(void);
 
     private:
         const char*  port;
@@ -76,6 +78,7 @@ class interlockRtmAsynDriver
         unsigned     count;
 
         interlockRtmFw fw;
+        Stream         fault_stream_;   // debugging
 
         epicsTimeStamp     time;
         unsigned           current_ts;

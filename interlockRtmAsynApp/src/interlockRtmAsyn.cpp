@@ -119,6 +119,7 @@ interlockRtmAsynDriver::interlockRtmAsynDriver(const char *portName, const char 
     try {
         p_root = (named_root && strlen(named_root))? cpswGetNamedRoot(named_root): cpswGetRoot();
         p_interlockRtm = p_root->findByName(strlen(pathString)? pathString: ".");
+        fault_stream_ = IStream::create(p_root->findByName("faultStream")); printf("register fulatStream\n");
     } catch (CPSWError &e) {
         fprintf(stderr, "CPSW Error: %s, file %s, line %d\n", e.getInfo().c_str(), __FILE__, __LINE__);
         throw e;
@@ -719,7 +720,24 @@ void interlockRtmAsynDriver::getRtmThresholdReadout(void)
     
 }
 
+void interlockRtmAsynDriver::pollStream(void)
+{
+    uint8_t p_buf[4096];
 
+
+    printf("faultStream_ thread\n");
+    fw->setFaultStreamEnable(1);
+
+    while(1) {
+        int size = fault_stream_->read(p_buf, 4096, CTimeout());
+        if(size) {
+            printf("\nfault stream\n");
+            printf("size : %d\n",size);
+            uint32_t *d = (uint32_t *) p_buf;
+            for(int i =0; i < (size/4); i++) printf("data[%d]: %8.8x\n", i, *(d+i));
+        }
+    }
+}
 
 
 extern "C" {
@@ -728,6 +746,12 @@ static int interlockRtmThread(void *p)
 {
     ((pDrvList_t *)p)->pInterlockRtmAsyn->interlockTask(p);
     return 0;
+}
+
+static int faultStreamThread(void *p)
+{
+   ((pDrvList_t *)p)->pInterlockRtmAsyn->pollStream();
+   return 0;
 }
 
 int interlockRtmAsynDriverConfigure(const char *portName, const char *regPathString, const char *named_root)
@@ -819,6 +843,9 @@ static int interlockRtmAsynDriverInitialize(void)
         if(p->pInterlockRtmAsyn) epicsThreadCreate(name, epicsThreadPriorityHigh,
                                                    epicsThreadGetStackSize(epicsThreadStackMedium),
                                                    (EPICSTHREADFUNC) interlockRtmThread, (void *) p);
+        if(p->pInterlockRtmAsyn) epicsThreadCreate(name, epicsThreadPriorityHigh,
+                                                   epicsThreadGetStackSize(epicsThreadStackMedium),
+                                                   (EPICSTHREADFUNC) faultStreamThread, (void *) p);
         p = (pDrvList_t *) ellNext(&p->node);
     }
 
