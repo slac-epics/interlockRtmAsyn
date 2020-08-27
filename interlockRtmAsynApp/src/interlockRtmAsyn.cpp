@@ -131,6 +131,7 @@ interlockRtmAsynDriver::interlockRtmAsynDriver(const char *portName, const char 
     ready    = false;
     count    = 0;
 
+    proc_pulseid = 0;
 
     paramSetup();
     initRtmWaveforms();
@@ -431,6 +432,9 @@ void interlockRtmAsynDriver::interlockProcess(epicsTimeStamp time, unsigned time
     this->current_ts = timeslot;
     this->pulseid    = PULSEID(time);
 
+    if((this->pulseid - this->proc_pulseid) < 360) return;
+
+    this->proc_pulseid = this->pulseid;
     setTimeStamp(&(this->time));
     if(ready) pevent->signal();
 }
@@ -459,7 +463,7 @@ void interlockRtmAsynDriver::interlockTask(void *p)
         if(rtmFaultOutStatus != st) {
             rtmFaultOutStatus = st;
             setIntegerParam(p_rtmFaultOutStatus, rtmFaultOutStatus);
-            if(st) { printf("fault: ");  takeRtmFaultHistory(); }
+            if(st) takeRtmFaultHistory();
         }
         
         fw->getRtmAdcLockedStatus(&st);

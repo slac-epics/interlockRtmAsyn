@@ -1,6 +1,7 @@
 R1.0.1     08-25-2020     Kukhee Kim
                         - clean up the history buffer processing in software
                         - siwtch to firmware based history buffer
+                        - slow down software processing for RTM
 
 R1.0.0     08-25-2020     Kukhee Kim
                         - build with llrfHls API R3.0.0

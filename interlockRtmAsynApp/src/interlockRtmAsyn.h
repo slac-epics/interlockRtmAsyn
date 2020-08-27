@@ -90,6 +90,8 @@ class interlockRtmAsynDriver
         epicsTimeStamp     time;
         unsigned           current_ts;
         unsigned           pulseid;
+
+        unsigned           proc_pulseid;
         uint32_t           rtmFirmwareVersion;
         char               rtmSystemId[32];
         char               rtmSubType[32];
