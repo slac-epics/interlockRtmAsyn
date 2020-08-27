@@ -125,6 +125,7 @@ interlockRtmAsynDriver::interlockRtmAsynDriver(const char *portName, const char 
     }
 
     fw = IinterlockRtmFw::create(p_interlockRtm);
+    fw->setFaultStreamEnable(0); // disable fault stream as a default
     pRtmLock = new epicsMutex;
     pevent   = new epicsEvent;
     ready    = false;
@@ -458,6 +459,7 @@ void interlockRtmAsynDriver::interlockTask(void *p)
         if(rtmFaultOutStatus != st) {
             rtmFaultOutStatus = st;
             setIntegerParam(p_rtmFaultOutStatus, rtmFaultOutStatus);
+            if(st) { printf("fault: ");  takeRtmFaultHistory(); }
         }
         
         fw->getRtmAdcLockedStatus(&st);
@@ -473,14 +475,8 @@ void interlockRtmAsynDriver::interlockTask(void *p)
         }
         
         
-        getRtmWaveforms();
-        if(rtmFaultOutStatus) {  // 0 - no fault, 1 - fault
-            takeRtmFaultHistory();
-        }
-        
-        
+        getRtmWaveforms();              
         getRtmThresholdReadout();
-              
         callParamCallbacks();
     }
 }
@@ -488,14 +484,9 @@ void interlockRtmAsynDriver::interlockTask(void *p)
 
 void interlockRtmAsynDriver::initRtmWaveforms(void)
 {
-    ellInit(&faultSnapShot);
-    ellInit(&bufferList);
-    
-    for(int i =0; i < SIZE_BUFFER_LIST; i++) {
-        fastADCWF_data_t * t = new fastADCWF_data_t;
-        memset(t, 0, sizeof(fastADCWF_data_t));
-        ellAdd(&bufferList, &t->node);
-    }
+    p_histBuff = (fastADCWF_data_t *) mallocMustSucceed(sizeof(fastADCWF_data_t) * (SIZE_FAULT_SNAPSHOT+1), "interlockRtmAsyn driver: history buffer");
+    p_firm_histBuff = (firmware_history_buffer_t *) mallocMustSucceed(sizeof(firmware_history_buffer_t), "interlockRtmAsyn driver: firmware history buffer");
+
 }
 
 void interlockRtmAsynDriver::convertFastADCWaveform(uint32_t adc[], double v[])
@@ -508,43 +499,53 @@ void interlockRtmAsynDriver::convertFastADCWaveform(uint32_t adc[], double v[])
 
 void interlockRtmAsynDriver::reportRtmWaveformBuffer(void)
 {
-    printf("        rtm waveform buffer: ring buffer %d, fault snapshot buffer %d\n",
-            ellCount(&bufferList), ellCount(&faultSnapShot));
+      // the history buffer related processing has been moved into firmware
+      // nothing to report for the dbior() command
 }
 
 void interlockRtmAsynDriver::clearRtmFaultHistory(void)
 {
-    fastADCWF_data_t  *t;
-    
-    pRtmLock->lock();
-    while(ellCount(&faultSnapShot)) {
-        t = (fastADCWF_data_t *) ellFirst(&faultSnapShot);
-        ellDelete(&faultSnapShot, &t->node);
-        //ellAdd(&bufferList, &t->node);
-        ellInsert(&bufferList, NULL, &t->node);
-    }
-    pRtmLock->unlock();
+    // the history buffer related processing has been moved into firmware
+    // nothing to do for the clean up history buffer
 }
 
 
 void interlockRtmAsynDriver::takeRtmFaultHistory(void)
 {
-    fastADCWF_data_t   *t;
-    
-    
-    pRtmLock->lock();
-    if(ellCount(&faultSnapShot)) {
-        pRtmLock->unlock();
-        return;
+    struct u16u16_t {
+        uint16_t lower;
+        uint16_t upper;
+    } *p_u16u16;
+
+    fw->getFaultHistoryBuffer(&(p_firm_histBuff->write_point), p_firm_histBuff->timestamp, p_firm_histBuff->iv, p_firm_histBuff->fr);
+    int index = (p_firm_histBuff->write_point)>>9;
+
+    for(int i = 0; i < SIZE_FAULT_SNAPSHOT; i++, index++) {
+        int hist_index = SIZE_FAULT_SNAPSHOT - i -1;
+        index = (index<SIZE_FAULT_SNAPSHOT)?index:0;
+        fastADCWF_data_t *t = p_histBuff + hist_index;
+
+        t->time.nsec         = p_firm_histBuff->timestamp[2*index +0];
+        t->time.secPastEpoch = p_firm_histBuff->timestamp[2*index +1];
+        t->pulseid           = t->time.nsec & 0x0001FFFF;
+        
+        for(int j = 0; j < 0x200; j++) {
+          p_u16u16 = (u16u16_t *) &(p_firm_histBuff->iv[0x200*index +j]);
+          t->beamCurrent.raw[j] = p_u16u16->upper;
+          t->beamVoltage.raw[j] = p_u16u16->lower;
+          p_u16u16 = (u16u16_t *) &(p_firm_histBuff->fr[0x200*index +j]);
+          t->forwardPower.raw[j] = p_u16u16->lower;
+          t->reflectPower.raw[j] = p_u16u16->upper;
+        }
+        
+        convertFastADCWaveform(t->beamCurrent.raw,  t->beamCurrent.data);
+        convertFastADCWaveform(t->beamVoltage.raw,  t->beamVoltage.data);
+        convertFastADCWaveform(t->forwardPower.raw, t->forwardPower.data);
+        convertFastADCWaveform(t->reflectPower.raw, t->reflectPower.data);
+        
     }
-    
-    for(int i = 0; i<SIZE_FAULT_SNAPSHOT; i++) {
-        t = (fastADCWF_data_t *) ellLast(&bufferList);
-        ellDelete(&bufferList, &t->node);
-        ellAdd(&faultSnapShot, &t->node);
-    }
-    pRtmLock->unlock();
-    
+
+   
     postRtmFaultHistory();
 }
 
@@ -552,11 +553,10 @@ void interlockRtmAsynDriver::takeRtmFaultHistory(void)
 
 void interlockRtmAsynDriver::postRtmFaultHistory(void)
 {
-    fastADCWF_data_t *t;
-    int i =0;
-    
-    t = (fastADCWF_data_t *) ellFirst(&faultSnapShot);
-    while(t) {
+
+    for(int i = 0; i < SIZE_FAULT_SNAPSHOT; i++) {
+        fastADCWF_data_t *t = p_histBuff + i;
+
         doCallbacksFloat64Array(t->beamCurrent.data, SIZE_FASTADC_DATA, p_rtmBeamCurrentHist[i], 0);
         doCallbacksFloat64Array(t->beamVoltage.data, SIZE_FASTADC_DATA, p_rtmBeamVoltageHist[i], 0);
         doCallbacksFloat64Array(t->forwardPower.data, SIZE_FASTADC_DATA, p_rtmFwdPowerHist[i], 0);
@@ -566,9 +566,6 @@ void interlockRtmAsynDriver::postRtmFaultHistory(void)
         setIntegerParam(p_pulseIdBeamVoltageHist[i], t->pulseid);
         setIntegerParam(p_pulseIdFwdPowerHist[i], t->pulseid);
         setIntegerParam(p_pulseIdRefPowerHist[i], t->pulseid);    
-    
-        t = (fastADCWF_data_t *) ellNext(&t->node);
-        if(++i > SIZE_FAULT_SNAPSHOT) break;
     }
 
 }
@@ -586,7 +583,7 @@ void interlockRtmAsynDriver::getRtmWaveforms(void)
     } *p;
 #pragma pack(pop)
     
-    fastADCWF_data_t *t;
+    fastADCWF_data_t *t = p_histBuff + CURRENT_BUFF;
     uint32_t v[SIZE_FASTADC_DATA];
     
     // Waveforms in high-level engineering units
@@ -595,11 +592,6 @@ void interlockRtmAsynDriver::getRtmWaveforms(void)
     double scaledFwdPower[SIZE_FASTADC_DATA];
     double scaledRefPower[SIZE_FASTADC_DATA];
     
-    pRtmLock->lock();
-    t= (fastADCWF_data_t*) ellFirst(&bufferList);
-    if(t) ellDelete(&bufferList, &t->node);
-    else { pRtmLock->unlock(); return; }
-    pRtmLock->unlock();
     
     t->time = time;
     t->pulseid = pulseid;
@@ -655,9 +647,6 @@ void interlockRtmAsynDriver::getRtmWaveforms(void)
     setIntegerParam(p_pulseIdFwdPower,    t->pulseid);
     setIntegerParam(p_pulseIdRefPower,    t->pulseid);
     
-    pRtmLock->lock();
-    ellAdd(&bufferList, &t->node);
-    pRtmLock->unlock();
        
 }
 

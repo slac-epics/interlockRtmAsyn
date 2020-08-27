@@ -16,16 +16,16 @@
 #define  SIZE_FASTADC_DATA (0x200 -2)
 #define  SIZE_BUFFER_LIST  16
 #define  SIZE_FAULT_SNAPSHOT 4
+#define  CURRENT_BUFF  SIZE_FAULT_SNAPSHOT
 
 
 typedef struct {
-    uint32_t raw[SIZE_FASTADC_DATA];
-    double   data[SIZE_FASTADC_DATA];
+    uint32_t raw[SIZE_FASTADC_DATA+2];
+    double   data[SIZE_FASTADC_DATA+2];
 } fastADC_data_t;
 
 
 typedef struct {
-    ELLNODE node;
     epicsTimeStamp    time;
     uint32_t          pulseid;
     fastADC_data_t       reflectPower;
@@ -33,6 +33,14 @@ typedef struct {
     fastADC_data_t       beamCurrent;
     fastADC_data_t       beamVoltage;
 } fastADCWF_data_t;
+
+
+typedef struct {
+    uint32_t write_point;         // write pointer
+    uint32_t timestamp[0x8];      // timestamp
+    uint32_t iv[0x800];           // beam voltage, beam current
+    uint32_t fr[0x800];           // forward, reflect
+} firmware_history_buffer_t;
 
 
 
@@ -68,8 +76,10 @@ class interlockRtmAsynDriver
     private:
         const char*  port;
         const char*  path;
-        ELLLIST      faultSnapShot;
-        ELLLIST      bufferList;
+
+        fastADCWF_data_t          *p_histBuff;
+        firmware_history_buffer_t *p_firm_histBuff;
+
         epicsMutex*  pRtmLock;
         epicsEvent*  pevent;
         bool         ready;
