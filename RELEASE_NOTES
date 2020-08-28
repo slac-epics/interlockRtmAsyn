@@ -1,4 +1,4 @@
-R1.0.1     08-25-2020     Kukhee Kim
+R1.1.0     08-28-2020     Kukhee Kim
                         - clean up the history buffer processing in software
                         - siwtch to firmware based history buffer
                         - slow down software processing for RTM
