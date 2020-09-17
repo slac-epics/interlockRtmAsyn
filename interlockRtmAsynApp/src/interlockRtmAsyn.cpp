@@ -206,6 +206,11 @@ void interlockRtmAsynDriver::paramSetup(void)
         sprintf(param_name, rtmFwdPowerHistWFString,    i); createParam(param_name, asynParamFloat64Array, &p_rtmFwdPowerHist[i]);
         sprintf(param_name, rtmRefPowerHistWFString,    i); createParam(param_name, asynParamFloat64Array, &p_rtmRefPowerHist[i]); 
         
+        sprintf(param_name, rtmScaledBeamCurrentHistWFString, i); createParam(param_name, asynParamFloat64Array, &p_rtmScaledBeamCurrentHist[i]);
+        sprintf(param_name, rtmScaledBeamVoltageHistWFString, i); createParam(param_name, asynParamFloat64Array, &p_rtmScaledBeamVoltageHist[i]);
+        sprintf(param_name, rtmScaledRefPowerHistWFString,    i); createParam(param_name, asynParamFloat64Array, &p_rtmScaledRefPowerHist[i]);
+        sprintf(param_name, rtmScaledFwdPowerHistWFString,    i); createParam(param_name, asynParamFloat64Array, &p_rtmScaledFwdPowerHist[i]);
+
         sprintf(param_name, rtmPulseIdBeamCurrentHistString, i); createParam(param_name, asynParamInt32, &p_pulseIdBeamCurrentHist[i]);
         sprintf(param_name, rtmPulseIdBeamVoltageHistString, i); createParam(param_name, asynParamInt32, &p_pulseIdBeamVoltageHist[i]);
         sprintf(param_name, rtmPulseIdFwdPowerHistString,    i); createParam(param_name, asynParamInt32, &p_pulseIdFwdPowerHist[i]);
@@ -500,6 +505,16 @@ void interlockRtmAsynDriver::convertFastADCWaveform(uint32_t adc[], double v[])
     }
 }
 
+void interlockRtmAsynDriver::convertFastADCWaveform(fastADC_data_t& t, double ratio, double offset)
+{
+    for(int i= 0; i< (int)SIZE_FASTADC_DATA; i++) {
+        // Convert raw values into [-1.0, 1.0]
+        t.data[i] = static_cast<double>(t.raw[i]) / 2048.0 - 1.0;
+
+        // Scale the value using the ratio and offset
+        t.scaled[i] = t.data[i]*ratio + offset;
+    }
+}
 
 void interlockRtmAsynDriver::reportRtmWaveformBuffer(void)
 {
@@ -542,11 +557,17 @@ void interlockRtmAsynDriver::takeRtmFaultHistory(void)
           t->reflectPower.raw[j] = p_u16u16->upper;
         }
         
-        convertFastADCWaveform(t->beamCurrent.raw,  t->beamCurrent.data);
-        convertFastADCWaveform(t->beamVoltage.raw,  t->beamVoltage.data);
-        convertFastADCWaveform(t->forwardPower.raw, t->forwardPower.data);
-        convertFastADCWaveform(t->reflectPower.raw, t->reflectPower.data);
-        
+        // Scaled ADC waveforms and convert them to high-level EGU
+        // - BeamVolts to input voltage = rtmDivrRatio
+        // - BeamCurrent to input voltage = rtmCurrRatio
+        // - ForwardPower to input voltage = rtmFwdcalRatio
+        // - ReflectedPower to input voltage = rtmRefcalRatio
+        // - RTM voltage divider = 40
+        // - FwdPower and RefPower are calibrated from documentation
+        convertFastADCWaveform(t->beamCurrent, rtmCurrRatio, 0);
+        convertFastADCWaveform(t->beamVoltage, rtmDivrRatio, 0);
+        convertFastADCWaveform(t->forwardPower, rtmFwdcalRatio, 0);
+        convertFastADCWaveform(t->reflectPower, rtmRefcalRatio, 0);
     }
 
    
@@ -561,11 +582,18 @@ void interlockRtmAsynDriver::postRtmFaultHistory(void)
     for(int i = 0; i < SIZE_FAULT_SNAPSHOT; i++) {
         fastADCWF_data_t *t = p_histBuff + i;
 
+        // Post scaled values
         doCallbacksFloat64Array(t->beamCurrent.data, SIZE_FASTADC_DATA, p_rtmBeamCurrentHist[i], 0);
         doCallbacksFloat64Array(t->beamVoltage.data, SIZE_FASTADC_DATA, p_rtmBeamVoltageHist[i], 0);
         doCallbacksFloat64Array(t->forwardPower.data, SIZE_FASTADC_DATA, p_rtmFwdPowerHist[i], 0);
         doCallbacksFloat64Array(t->reflectPower.data, SIZE_FASTADC_DATA, p_rtmRefPowerHist[i], 0); 
         
+        // Post high-level EGU values
+        doCallbacksFloat64Array(t->beamCurrent.scaled, SIZE_FASTADC_DATA, p_rtmScaledBeamCurrentHist[i], 0);
+        doCallbacksFloat64Array(t->beamVoltage.scaled, SIZE_FASTADC_DATA, p_rtmScaledBeamVoltageHist[i], 0);
+        doCallbacksFloat64Array(t->forwardPower.scaled, SIZE_FASTADC_DATA, p_rtmScaledFwdPowerHist[i], 0);
+        doCallbacksFloat64Array(t->reflectPower.scaled, SIZE_FASTADC_DATA, p_rtmScaledRefPowerHist[i], 0);
+
         setIntegerParam(p_pulseIdBeamCurrentHist[i], t->pulseid);
         setIntegerParam(p_pulseIdBeamVoltageHist[i], t->pulseid);
         setIntegerParam(p_pulseIdFwdPowerHist[i], t->pulseid);
@@ -617,34 +645,29 @@ void interlockRtmAsynDriver::getRtmWaveforms(void)
         t->reflectPower.raw[i] = p->upper;
     }
     
-    convertFastADCWaveform(t->beamCurrent.raw,  t->beamCurrent.data);
-    convertFastADCWaveform(t->beamVoltage.raw,  t->beamVoltage.data);
-    convertFastADCWaveform(t->forwardPower.raw, t->forwardPower.data);
-    convertFastADCWaveform(t->reflectPower.raw, t->reflectPower.data);
-    
+    // Scaled ADC waveforms and convert them to high-level EGU
+    // - BeamVolts to input voltage = rtmDivrRatio
+    // - BeamCurrent to input voltage = rtmCurrRatio
+    // - ForwardPower to input voltage = rtmFwdcalRatio
+    // - ReflectedPower to input voltage = rtmRefcalRatio
+    // - RTM voltage divider = 40
+    // - FwdPower and RefPower are calibrated from documentation
+    convertFastADCWaveform(t->beamCurrent, rtmCurrRatio, 0);
+    convertFastADCWaveform(t->beamVoltage, rtmDivrRatio, 0);
+    convertFastADCWaveform(t->forwardPower, rtmFwdcalRatio, 0);
+    convertFastADCWaveform(t->reflectPower, rtmRefcalRatio, 0);
+
+    // Post scaled values
     doCallbacksFloat64Array(t->beamCurrent.data,  SIZE_FASTADC_DATA, p_rtmBeamCurrentWF, 0);
     doCallbacksFloat64Array(t->beamVoltage.data,  SIZE_FASTADC_DATA, p_rtmBeamVoltageWF, 0);
     doCallbacksFloat64Array(t->forwardPower.data, SIZE_FASTADC_DATA, p_rtmFwdPowerWF,    0);
     doCallbacksFloat64Array(t->reflectPower.data, SIZE_FASTADC_DATA, p_rtmRefPowerWF,    0);
 
-    // Convert scaled waveforms to high-level EGU
-    for(int i=0; i<SIZE_FASTADC_DATA; i++) {
-      // BeamVolts to input voltage = rtmDivrRatio
-      // BeamCurrent to input voltage = rtmCurrRatio
-      // ForwardPower to input voltage = rtmFwdcalRatio
-      // ReflectedPower to input voltage = rtmRefcalRatio
-      // RTM voltage divider = 40
-      // FwdPower and RefPower are calibrated from documentation
-      scaledBeamVolts[i] = t->beamVoltage.data[i] * rtmDivrRatio; // BeamVolts to kV
-      scaledBeamCurrent[i] = t->beamCurrent.data[i] * rtmCurrRatio; // BeamCurrent to A
-      scaledFwdPower[i] = t->forwardPower.data[i] * rtmFwdcalRatio; // FwdPower to MW
-      scaledRefPower[i] = t->reflectPower.data[i] * rtmRefcalRatio; // RefPower to MW
-    }
-       
-    doCallbacksFloat64Array(scaledBeamVolts, SIZE_FASTADC_DATA, p_rtmBeamVoltageScaled, 0);
-    doCallbacksFloat64Array(scaledBeamCurrent, SIZE_FASTADC_DATA, p_rtmBeamCurrentScaled, 0);
-    doCallbacksFloat64Array(scaledFwdPower, SIZE_FASTADC_DATA, p_rtmFwdPowerScaled, 0);
-    doCallbacksFloat64Array(scaledRefPower, SIZE_FASTADC_DATA, p_rtmRefPowerScaled, 0);
+    // Post high-level EGU values
+    doCallbacksFloat64Array(t->beamVoltage.scaled, SIZE_FASTADC_DATA, p_rtmBeamVoltageScaled, 0);
+    doCallbacksFloat64Array(t->beamCurrent.scaled, SIZE_FASTADC_DATA, p_rtmBeamCurrentScaled, 0);
+    doCallbacksFloat64Array(t->forwardPower.scaled, SIZE_FASTADC_DATA, p_rtmFwdPowerScaled, 0);
+    doCallbacksFloat64Array(t->reflectPower.scaled, SIZE_FASTADC_DATA, p_rtmRefPowerScaled, 0);
 
     setIntegerParam(p_pulseIdBeamCurrent, t->pulseid);
     setIntegerParam(p_pulseIdBeamVoltage, t->pulseid);

@@ -22,6 +22,7 @@
 typedef struct {
     uint32_t raw[SIZE_FASTADC_DATA+2];
     double   data[SIZE_FASTADC_DATA+2];
+    double   scaled[SIZE_FASTADC_DATA+2];
 } fastADC_data_t;
 
 
@@ -62,6 +63,7 @@ class interlockRtmAsynDriver
         void interlockTask(void *p);
         void initRtmWaveforms(void);
         void convertFastADCWaveform(uint32_t adc[], double v[]);
+        void convertFastADCWaveform(fastADC_data_t& t, double ratio, double offset);
         void reportRtmWaveformBuffer(void);
         void clearRtmFaultHistory(void);
         void takeRtmFaultHistory(void);
@@ -181,6 +183,11 @@ class interlockRtmAsynDriver
         int p_rtmFwdPowerHist[SIZE_FAULT_SNAPSHOT];         /* asynFloat64Arrray */
         int p_rtmRefPowerHist[SIZE_FAULT_SNAPSHOT];         /* asynFloat64Arrat */
     
+        int p_rtmScaledBeamCurrentHist[SIZE_FAULT_SNAPSHOT];   /* asynFloat64Array */
+        int p_rtmScaledBeamVoltageHist[SIZE_FAULT_SNAPSHOT];   /* asynFloat64Array */
+        int p_rtmScaledRefPowerHist[SIZE_FAULT_SNAPSHOT];      /* asynFloat64Array */
+        int p_rtmScaledFwdPowerHist[SIZE_FAULT_SNAPSHOT];      /* asynFloat64Array */
+
         int p_pulseIdBeamCurrentHist[SIZE_FAULT_SNAPSHOT];  /* asynInt32 */
         int p_pulseIdBeamVoltageHist[SIZE_FAULT_SNAPSHOT];  /* asynInt32 */
         int p_pulseIdFwdPowerHist[SIZE_FAULT_SNAPSHOT];     /* asynInt32 */
@@ -241,6 +248,10 @@ class interlockRtmAsynDriver
 #define rtmRefPowerWFString                "rtmRefPowerWF"
 #define rtmRefPowerScaledString            "rtmRefPowerScaled"
 #define rtmRefPowerHistWFString            "rtmRefPowerHist%d"
+#define rtmScaledBeamCurrentHistWFString   "rtmScaledBeamCurrentHist%d"
+#define rtmScaledBeamVoltageHistWFString   "rtmScaledBeamVoltageHist%d"
+#define rtmScaledRefPowerHistWFString      "rtmScaledRefPowerHist%d"
+#define rtmScaledFwdPowerHistWFString      "rtmScaledFwdPowerHist%d"
 
 #define rtmSetFwdcalRatioString            "rtmSetFwdcalRatio"
 #define rtmSetRefcalRatioString            "rtmSetRefcalRatio"
