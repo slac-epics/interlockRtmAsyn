@@ -1,3 +1,7 @@
+R1.2.0     08-21-2020     Kukhee Kim
+                        - build with llrfHls R3.1.0
+
+
 R1.1.0     08-28-2020     Kukhee Kim
                         - clean up the history buffer processing in software
                         - siwtch to firmware based history buffer
