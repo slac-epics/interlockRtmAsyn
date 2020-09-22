@@ -1,3 +1,9 @@
+R1.3.0     08-22-2020     Jesus Vasquez
+                        - Add scaled fault history buffer waveforms.
+                        - Add missing PV for scaling the reflected power peak value.
+                        - Fix equation use to convert threshold values to raw unit.
+                        - Add missing EGU fields in some high level PVs.
+
 R1.2.0     08-21-2020     Kukhee Kim
                         - build with llrfHls R3.1.0
 
