@@ -10,6 +10,19 @@ record(waveform, "$(PRIMARY):$(MICRO):$(UNIT):FAULTHIST$(HIST)_RTM_BCURR_WF")
     field(TSE,  "-2")
 }
 
+record(waveform, "$(PRIMARY):$(MICRO):$(UNIT):FAULTHIST$(HIST)_SCALED_BCURR_WF")
+{
+ #  field(PINI, "YES")
+    field(DESC, "Klystron Scaled Beam Current")
+    field(DTYP, "asynFloat64ArrayIn")
+    field(INP,  "@asyn($(PORT),0) rtmScaledBeamCurrentHist$(HIST)")
+    field(SCAN, "I/O Intr")
+    field(FTVL, "DOUBLE")
+    field(NELM, "$(SIZE)")
+    field(TSE,  "-2")
+    field(EGU,  "A")
+}
+
 record(waveform, "$(PRIMARY):$(MICRO):$(UNIT):FAULTHIST$(HIST)_RTM_BVOLT_WF")
 {
  #  field(PINI, "YES")
@@ -22,6 +35,19 @@ record(waveform, "$(PRIMARY):$(MICRO):$(UNIT):FAULTHIST$(HIST)_RTM_BVOLT_WF")
     field(TSE,  "-2")
 }
 
+record(waveform, "$(PRIMARY):$(MICRO):$(UNIT):FAULTHIST$(HIST)_SCALED_BVOLT_WF")
+{
+ #  field(PINI, "YES")
+    field(DESC, "Klystron Scaled Beam Voltage")
+    field(DTYP, "asynFloat64ArrayIn")
+    field(INP,  "@asyn($(PORT),0) rtmScaledBeamVoltageHist$(HIST)")
+    field(SCAN, "I/O Intr")
+    field(FTVL, "DOUBLE")
+    field(NELM, "$(SIZE)")
+    field(TSE,  "-2")
+    field(EGU,  "kV")
+}
+
 record(waveform, "$(PRIMARY):$(MICRO):$(UNIT):FAULTHIST$(HIST)_RTM_RE_WF")
 {
  #  field(PINI, "YES")
@@ -32,6 +58,19 @@ record(waveform, "$(PRIMARY):$(MICRO):$(UNIT):FAULTHIST$(HIST)_RTM_RE_WF")
     field(FTVL, "DOUBLE")
     field(NELM, "$(SIZE)")
     field(TSE,  "-2")
+}
+
+record(waveform, "$(PRIMARY):$(MICRO):$(UNIT):FAULTHIST$(HIST)_SCALED_RE_WF")
+{
+ #  field(PINI, "YES")
+    field(DESC, "Klystron Scaled Reflect Power")
+    field(DTYP, "asynFloat64ArrayIn")
+    field(INP,  "@asyn($(PORT),0) rtmScaledRefPowerHist$(HIST)")
+    field(SCAN, "I/O Intr")
+    field(FTVL, "DOUBLE")
+    field(NELM, "$(SIZE)")
+    field(TSE,  "-2")
+    field(EGU,  "MW")
 }
 
 record(longin, "$(PRIMARY):$(MICRO):$(UNIT):FAULTHIST$(HIST)_WFPULSEID")

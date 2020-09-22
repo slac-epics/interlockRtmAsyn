@@ -36,4 +36,5 @@ record(waveform, "$(PRIMARY):$(MICRO):$(UNIT):$(WF)_WF_X")
     field(DESC, "$(DESC)")
     field(FTVL, "DOUBLE")
     field(NELM, "$(SIZE)")
+    field(EGU,  "us")
 }

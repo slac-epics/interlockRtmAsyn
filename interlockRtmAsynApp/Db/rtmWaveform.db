@@ -287,3 +287,15 @@ record(calc, "$(PRIMARY):$(MICRO):$(UNIT):SCALED_BVOLT_PK") {
   info(autosaveFields, "VAL LLSV LSV HSV HHSV LOLO LOW HIGH HIHI")
 }
 
+record(calc, "$(PRIMARY):$(MICRO):$(UNIT):SCALED_RE_PK") {
+  field(DESC, "Reflect Power")
+  field(SCAN, "1 second")
+  field(PINI, "YES")
+  field(PREC, "6")
+  field(HSV, "MAJOR")
+  field(INPA, "$(PRIMARY):$(MICRO):$(UNIT):RTM_RE_PK")
+  field(INPB, "$(PRIMARY):$(MICRO):$(UNIT):RE_RTM_SCALE CP")
+  field(CALC, "A*B")
+  field(EGU,  "MW")
+  info(autosaveFields, "VAL LLSV LSV HSV HHSV LOLO LOW HIGH HIHI")
+}
