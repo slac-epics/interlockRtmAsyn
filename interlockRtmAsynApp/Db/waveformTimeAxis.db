@@ -1,4 +1,4 @@
-record(ao, "$(PRIMARY):$(MICRO):$(UNIT):$(WF)_WF_OFFSET")
+record(ao, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):$(WF)_WF_OFFSET")
 {
     field(PINI, "YES")
     field(DESC, "$(DESC) offset")
@@ -11,7 +11,7 @@ record(ao, "$(PRIMARY):$(MICRO):$(UNIT):$(WF)_WF_OFFSET")
 #INPB = Size of waveform
 #INPC = optional offset (us)
 #VALA = Time Axis
-record(aSub, "$(PRIMARY):$(MICRO):$(UNIT):$(WF)_WF_ASUB")
+record(aSub, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):$(WF)_WF_ASUB")
 {
     field(PINI, "YES")
     field(DESC, "$(DESC) calc")
@@ -20,18 +20,18 @@ record(aSub, "$(PRIMARY):$(MICRO):$(UNIT):$(WF)_WF_ASUB")
 
     field(INPA, "$(FREQ)")
     field(INPB, "$(SIZE)")
-    field(INPC, "$(PRIMARY):$(MICRO):$(UNIT):$(WF)_WF_OFFSET CP")
+    field(INPC, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):$(WF)_WF_OFFSET CP")
 
     field(FTA, "DOUBLE")
     field(FTB, "LONG")
     field(FTC, "DOUBLE")
 
-    field(OUTA, "$(PRIMARY):$(MICRO):$(UNIT):$(WF)_WF_X PP")
+    field(OUTA, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):$(WF)_WF_X PP")
     field(NOVA, "$(SIZE)")
     field(FTVA, "DOUBLE")
 }
 
-record(waveform, "$(PRIMARY):$(MICRO):$(UNIT):$(WF)_WF_X")
+record(waveform, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):$(WF)_WF_X")
 {
     field(DESC, "$(DESC)")
     field(FTVL, "DOUBLE")

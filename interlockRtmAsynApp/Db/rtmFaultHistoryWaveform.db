@@ -1,4 +1,4 @@
-record(waveform, "$(PRIMARY):$(MICRO):$(UNIT):FAULTHIST$(HIST)_RTM_BCURR_WF")
+record(waveform, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):FAULTHIST$(HIST)_RTM_BCURR_WF")
 {
  #  field(PINI, "YES")
     field(DESC, "Klystron Beam Current")
@@ -10,7 +10,7 @@ record(waveform, "$(PRIMARY):$(MICRO):$(UNIT):FAULTHIST$(HIST)_RTM_BCURR_WF")
     field(TSE,  "-2")
 }
 
-record(waveform, "$(PRIMARY):$(MICRO):$(UNIT):FAULTHIST$(HIST)_SCALED_BCURR_WF")
+record(waveform, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):FAULTHIST$(HIST)_SCALED_BCURR_WF")
 {
  #  field(PINI, "YES")
     field(DESC, "Klystron Scaled Beam Current")
@@ -23,7 +23,7 @@ record(waveform, "$(PRIMARY):$(MICRO):$(UNIT):FAULTHIST$(HIST)_SCALED_BCURR_WF")
     field(EGU,  "A")
 }
 
-record(waveform, "$(PRIMARY):$(MICRO):$(UNIT):FAULTHIST$(HIST)_RTM_BVOLT_WF")
+record(waveform, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):FAULTHIST$(HIST)_RTM_BVOLT_WF")
 {
  #  field(PINI, "YES")
     field(DESC, "Klystron Beam Voltage")
@@ -35,7 +35,7 @@ record(waveform, "$(PRIMARY):$(MICRO):$(UNIT):FAULTHIST$(HIST)_RTM_BVOLT_WF")
     field(TSE,  "-2")
 }
 
-record(waveform, "$(PRIMARY):$(MICRO):$(UNIT):FAULTHIST$(HIST)_SCALED_BVOLT_WF")
+record(waveform, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):FAULTHIST$(HIST)_SCALED_BVOLT_WF")
 {
  #  field(PINI, "YES")
     field(DESC, "Klystron Scaled Beam Voltage")
@@ -48,7 +48,7 @@ record(waveform, "$(PRIMARY):$(MICRO):$(UNIT):FAULTHIST$(HIST)_SCALED_BVOLT_WF")
     field(EGU,  "kV")
 }
 
-record(waveform, "$(PRIMARY):$(MICRO):$(UNIT):FAULTHIST$(HIST)_RTM_RE_WF")
+record(waveform, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):FAULTHIST$(HIST)_RTM_RE_WF")
 {
  #  field(PINI, "YES")
     field(DESC, "Klystron Reflect Power")
@@ -60,7 +60,7 @@ record(waveform, "$(PRIMARY):$(MICRO):$(UNIT):FAULTHIST$(HIST)_RTM_RE_WF")
     field(TSE,  "-2")
 }
 
-record(waveform, "$(PRIMARY):$(MICRO):$(UNIT):FAULTHIST$(HIST)_SCALED_RE_WF")
+record(waveform, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):FAULTHIST$(HIST)_SCALED_RE_WF")
 {
  #  field(PINI, "YES")
     field(DESC, "Klystron Scaled Reflect Power")
@@ -73,7 +73,7 @@ record(waveform, "$(PRIMARY):$(MICRO):$(UNIT):FAULTHIST$(HIST)_SCALED_RE_WF")
     field(EGU,  "MW")
 }
 
-record(longin, "$(PRIMARY):$(MICRO):$(UNIT):FAULTHIST$(HIST)_WFPULSEID")
+record(longin, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):FAULTHIST$(HIST)_WFPULSEID")
 {
     field(DESC, "PulseID for fault history$(HIST) waveform")
     field(DTYP, "asynInt32")

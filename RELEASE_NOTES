@@ -1,3 +1,7 @@
+R1.4.0     09-24-2020     Kukhee Kim
+                        - introduce $(DEV) macro, macro change for consistancy
+                           $(PRIMARY):$(MICRO):$(UNIT)  ----->  $(DEV=$(PRIMARY):$(MICRO):$(UNIT))
+
 R1.3.0     08-22-2020     Jesus Vasquez
                         - Add scaled fault history buffer waveforms.
                         - Add missing PV for scaling the reflected power peak value.
