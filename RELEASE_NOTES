@@ -1,3 +1,6 @@
+R1.5.0     10-01-2020     Kukhee Kim
+                        - build with llrfHls R4.0.0
+
 R1.4.0     09-24-2020     Kukhee Kim
                         - introduce $(DEV) macro, macro change for consistancy
                            $(PRIMARY):$(MICRO):$(UNIT)  ----->  $(DEV=$(PRIMARY):$(MICRO):$(UNIT))
