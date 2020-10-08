@@ -1,3 +1,6 @@
+R1.6.1     10-08-2020     Jesus Vasquez
+                        - Set PREC = 2 for the high level set threshold PVs
+
 R1.6.0     10-05-2020     Kukhee Kim
                         - build with llrfHls R4.1.0
 
