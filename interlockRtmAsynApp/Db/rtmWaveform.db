@@ -271,12 +271,13 @@ record(calc, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):SCALED_BCURR_PK") {
   field(INPB, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):BC_RTM_SCALE CP")
   field(CALC, "A*B")
   field(EGU,  "A")
+  field(FLNK, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):SCALED_BVOLT_PK")
   info(autosaveFields, "VAL LLSV LSV HSV HHSV LOLO LOW HIGH HIHI")
 }
 
 record(calc, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):SCALED_BVOLT_PK") {
   field(DESC, "Beam Voltage")
-  field(SCAN, "1 second")
+  field(SCAN, "Passive")
   field(PINI, "YES")
   field(PREC, "6")
   field(HSV, "MAJOR")
@@ -284,7 +285,22 @@ record(calc, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):SCALED_BVOLT_PK") {
   field(INPB, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):BV_RTM_SCALE CP")
   field(CALC, "A*B")
   field(EGU,  "kV")
+  field(FLNK, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):PERV_PK")
   info(autosaveFields, "VAL LLSV LSV HSV HHSV LOLO LOW HIGH HIHI")
+}
+
+record(calc, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):PERV_PK") {
+  field(DESC, "Perveance from peak")
+  field(SCAN, "Passive")
+  field(EGU,  "uK")
+  field(INPA, "$(PRIMARY):$(MICRO):$(UNIT):SCALED_BCURR_PK")
+  field(INPB, "$(PRIMARY):$(MICRO):$(UNIT):SCALED_BVOLT_PK")
+  field(CALC, "(B#0)?(A/((B*1000)^1.5))*1000000:0")
+  field(LLSV, "MAJOR")
+  field(LSV,  "MINOR")
+  field(HSV,  "MINOR")
+  field(HHSV, "MAJOR")
+  info(autosaveFields, "VAL DESC LLSV LSV HSV HHSV LOLO LOW HIGH HIHI")
 }
 
 record(calc, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):SCALED_RE_PK") {
