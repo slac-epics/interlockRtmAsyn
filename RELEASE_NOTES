@@ -1,4 +1,4 @@
-R1.4.0     10-15-2020   Jesus Vasquez
+R1.7.0     10-15-2020   Jesus Vasquez
                         - Add Perveance PV: PERV_PK, calculated from scaled peak beam 
                           current and voltage, and expressed un uK.
 
