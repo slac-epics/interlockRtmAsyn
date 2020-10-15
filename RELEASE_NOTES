@@ -1,6 +1,7 @@
 R1.7.0     10-15-2020   Jesus Vasquez
                         - Add Perveance PV: PERV_PK, calculated from scaled peak beam 
                           current and voltage, and expressed un uK.
+                        - Restore Forward Power PVs.
 
 R1.6.3     10-09-2020     Kukhee Kim
                         - build with llrfHls R4.1.2
