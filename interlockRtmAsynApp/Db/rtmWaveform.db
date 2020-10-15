@@ -92,6 +92,28 @@ record(compress, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):RTM_RE_PK")
 }
 
 
+record(waveform, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):RTM_FWD_WF")
+{
+ #  field(PINI, "YES")
+    field(DESC, "Klystron Forward Power")
+    field(DTYP, "asynFloat64ArrayIn")
+    field(INP,  "@asyn($(PORT),0) rtmFwdPowerWF")
+    field(SCAN, "I/O Intr")
+    field(FTVL, "DOUBLE")
+    field(NELM, "$(SIZE)")
+    field(TSE,  "-2")
+    field(FLNK, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):RTM_FWD_PK")
+}
+
+record(compress, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):RTM_FWD_PK")
+{
+    field(DESC, "Peak Klystron Forward Power")
+    field(INP,  "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):RTM_FWD_WF")
+    field(ALG,  "N to 1 High Value")
+    field(NSAM, "1")
+    field(N,    "$(SIZE)")
+    field(TSEL, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):RTM_FWD_WF.TIME")
+}
 
 record(longin, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):RTM_WFPULSEID")
 {
@@ -165,6 +187,31 @@ record(calcout, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):RE_RTM_SCALE") {
 record(ao, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):RE_CAL_OUT") {
   field(DTYP, "asynFloat64")
   field(OUT,  "@asyn($(PORT),0) rtmSetRefcalRatio")
+  field(ASG,  "Internal")
+}
+
+record(ao, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):FWD_WF_SCALE") {
+  field(DESC, "Forward Power waveform calibration")
+  field(PINI, "YES")
+  field(PREC, "3")
+  field(VAL,  "1")
+  field(ASG, "KLYS_MAINT")
+  field(FLNK, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):FWD_RTM_SCALE")
+  info(autosaveFields, "VAL")
+}
+
+record(calcout, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):FWD_RTM_SCALE") {
+  field(DESC, "Total Forward Power calibration")
+  field(PINI, "YES")
+  field(INPA, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):FWD_WF_SCALE")
+  field(CALC, "A")
+  field(OUT,  "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):FWD_CAL_OUT PP")
+  field(ASG, "Internal")
+}
+
+record(ao, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):FWD_CAL_OUT") {
+  field(DTYP, "asynFloat64")
+  field(OUT,  "@asyn($(PORT),0) rtmSetFwdcalRatio")
   field(ASG,  "Internal")
 }
 
@@ -311,6 +358,19 @@ record(calc, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):SCALED_RE_PK") {
   field(HSV, "MAJOR")
   field(INPA, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):RTM_RE_PK")
   field(INPB, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):RE_RTM_SCALE CP")
+  field(CALC, "A*B")
+  field(EGU,  "MW")
+  info(autosaveFields, "VAL LLSV LSV HSV HHSV LOLO LOW HIGH HIHI")
+}
+
+record(calc, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):SCALED_FWD_PK") {
+  field(DESC, "Forward Power")
+  field(SCAN, "1 second")
+  field(PINI, "YES")
+  field(PREC, "6")
+  field(HSV,  "MAJOR")
+  field(INPA, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):RTM_FWD_PK")
+  field(INPB, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):FWD_RTM_SCALE CP")
   field(CALC, "A*B")
   field(EGU,  "MW")
   info(autosaveFields, "VAL LLSV LSV HSV HHSV LOLO LOW HIGH HIHI")
