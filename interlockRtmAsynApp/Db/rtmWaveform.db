@@ -342,7 +342,7 @@ record(calc, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):PERV_PK") {
   field(EGU,  "uK")
   field(INPA, "$(PRIMARY):$(MICRO):$(UNIT):SCALED_BCURR_PK")
   field(INPB, "$(PRIMARY):$(MICRO):$(UNIT):SCALED_BVOLT_PK")
-  field(CALC, "(B#0)?(A/((B*1000)^1.5))*1000000:0")
+  field(CALC, "(B>0)?(A/((B*1000)^1.5))*1000000:0")
   field(LLSV, "MAJOR")
   field(LSV,  "MINOR")
   field(HSV,  "MINOR")
