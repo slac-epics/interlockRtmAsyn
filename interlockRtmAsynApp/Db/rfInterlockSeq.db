@@ -142,3 +142,16 @@ record(bi, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):BCUR_FLT")
     info(autosaveFields, "VAL")
 }
 
+record(ao, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):FAULTSEQ_AREQ")
+{
+    field(PINI, "YES")
+    field(DESC, "AREQ target for the fault sequencer")
+    field(SCAN, "Passive")
+    field(PREC, "3")
+    field(HHSV, "MAJOR")
+    field(HSV,  "MINOR")
+    field(LSV,  "MINOR")
+    field(LLSV, "MAJOR")
+    info(autosaveFields, "VAL LOLO LOW HIGH HIHI EGU PREC")
+}
+
