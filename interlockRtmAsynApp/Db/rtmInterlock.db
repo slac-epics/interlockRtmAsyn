@@ -475,16 +475,6 @@ record(bi, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):RTM_FAULTOUT")
     field(TSE,  "-2")
 }
 
-record(calcout, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):RTM_FAULTCOUNT_CALC")
-{
-    field(DESC, "Calculate RTM recent faults")
-    field(INPA, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):RTM_FAULTOUT CPP")
-    field(INPB, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):RTM_FAULTCOUNT")
-    field(CALC, "A + B")
-    field(OUT,  "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):RTM_FAULTCOUNT PP")
-    field(ASG,  "Internal")
-}
-
 record(longout, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):RTM_FAULTCOUNT")
 {
     field(PINI, "YES")
