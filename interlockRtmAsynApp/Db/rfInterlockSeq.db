@@ -153,3 +153,12 @@ record(bi, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):FAULTSEQ_TRIG_MOVED")
     field(ZNAM, "No")
     field(ONAM, "Yes")
 }
+
+record(calcout, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):FAULTSEQ_TRIG_MOVED_RESET")
+{
+    field(DESC, "Clear FAULTSEQ_TRIG_MOVED when trigger are changed")
+    field(INPA, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):MODECFG CP")
+    field(CALC, "0")
+    field(OUT,  "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):FAULTSEQ_TRIG_MOVED PP")
+    field(ASG,  "Internal")
+}
