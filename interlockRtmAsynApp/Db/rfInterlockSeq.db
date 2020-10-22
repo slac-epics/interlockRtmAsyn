@@ -89,24 +89,6 @@ record(ao, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):FAULTSEQ_FDBK_TIMEOUT")
     info(autosaveFields, "VAL LOLO LOW HIGH HIHI")
 }
 
-record(bo, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):FAULTSEQ_ENABLE_TIMEOUT")
-{
-    field(DESC, "Enable faulted phase feedback timeout")
-    field(ZNAM, "Disable")
-    field(ONAM, "Enable")
-    field(VAL,  "1")
-    info(autosaveFields, "VAL ZSV OSV")
-}
-
-record(calc, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):FAULTSEQ_FDBK_WAIT")
-{
-    field(DESC, "wait for phase feedback to recover")
-    field(INPA, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):FAULTSEQ_ENABLE_TIMEOUT CPP")
-    field(INPB, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):PHASE_CONTROL CPP")
-    field(CALC, "A && B")
-    field(ASG,  "Internal")
-}
-
 record(bo, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):FAULTSEQ_MOVE_TRIG")
 {
     field(DESC, "Move triggers to standby during fault")
