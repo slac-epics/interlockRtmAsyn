@@ -1,3 +1,7 @@
+R1.8.0     10-22-2020   Jesus Vasquez
+                        - Fix PV related to the fault sequencer. Removed unused PV, and add 
+                          new PV
+
 R1.7.0     10-15-2020   Jesus Vasquez
                         - Add Perveance PV: PERV_PK, calculated from scaled peak beam 
                           current and voltage, and expressed un uK.
