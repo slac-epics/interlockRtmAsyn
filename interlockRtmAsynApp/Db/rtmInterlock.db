@@ -478,7 +478,7 @@ record(bi, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):RTM_FAULTOUT")
 record(longout, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):RTM_CLEARFAULTCOUNT")
 {
     field(PINI, "YES")
-    field(DESC, "RTM recent clear fault retry counter")
+    field(DESC, "RTM recent clear fault counter")
     field(HSV,  "MAJOR")
 }
 
@@ -495,7 +495,7 @@ record(longout, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):RTM_CLEARFAULTCOUNT_MAX")
 record(longout, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):RTM_CLEARFAULTCOUNT_RESETDELAY")
 {
     field(PINI, "YES")
-    field(DESC, "Delay to reset the clear fault retry counter")
+    field(DESC, "Delay to reset clear fault counter")
     field(EGU,  "s")
     field(VAL,  "3")
     info(autosaveFields, "VAL")
