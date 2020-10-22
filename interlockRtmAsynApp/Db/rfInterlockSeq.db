@@ -150,6 +150,6 @@ record(ai, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):FAULTSEQ_ADES")
 record(bi, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):FAULTSEQ_TRIG_MOVED")
 {
     field(DESC, "The sequencer moved the trigger to standby")
-    field(ZNAM, "Yes")
-    field(ONAM, "No")
+    field(ZNAM, "No")
+    field(ONAM, "Yes")
 }
