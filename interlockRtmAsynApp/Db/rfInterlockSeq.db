@@ -53,7 +53,7 @@ record(ao, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):FAULTSEQ_RAMPTIME")
     info(autosaveFields, "VAL LOLO LOW HIGH HIHI")
 }
 
-record(ao, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):FAULTSEQ_DELAY")
+record(ao, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):FAULTSEQ_CLEARFAULT_DELAY")
 {
     field(DESC, "time delay before fault clear")
     field(PREC, "1")
