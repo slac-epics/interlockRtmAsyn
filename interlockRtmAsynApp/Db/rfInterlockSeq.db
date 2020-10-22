@@ -147,3 +147,9 @@ record(ai, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):FAULTSEQ_ADES")
     info(autosaveFields, "VAL LOLO LOW HIGH HIHI EGU PREC")
 }
 
+record(bi, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):FAULTSEQ_TRIG_MOVED")
+{
+    field(DESC, "The sequencer moved the trigger to standby")
+    field(ZNAM, "Yes")
+    field(ONAM, "No")
+}
