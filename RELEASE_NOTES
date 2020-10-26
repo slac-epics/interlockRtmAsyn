@@ -1,3 +1,6 @@
+R1.8.1     10-26-2020   Jesus Vasquez
+                        - Remove unused PV RTM_CLEARFAULTCOUNT_RESETDELAY.
+
 R1.8.0     10-22-2020   Jesus Vasquez
                         - Fix PV related to the fault sequencer. Removed unused PV, and add 
                           new PV
