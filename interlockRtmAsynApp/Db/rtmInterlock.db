@@ -492,15 +492,6 @@ record(longout, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):RTM_CLEARFAULTCOUNT_MAX")
     info(autosaveFields, "VAL")
 }
 
-record(longout, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):RTM_CLEARFAULTCOUNT_RESETDELAY")
-{
-    field(PINI, "YES")
-    field(DESC, "Delay to reset clear fault counter")
-    field(EGU,  "s")
-    field(VAL,  "3")
-    info(autosaveFields, "VAL")
-}
-
 record(bi, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):RTM_ADCLOCK")
 {
     field(DESC, "RTM ADC Lock Status")
