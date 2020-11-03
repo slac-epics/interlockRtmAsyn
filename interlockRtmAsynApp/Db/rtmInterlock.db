@@ -475,21 +475,48 @@ record(bi, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):RTM_FAULTOUT")
     field(TSE,  "-2")
 }
 
+record(calcout, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):RTM_FAULTCOUNT_CALC")
+{
+    field(DESC, "Calculate RTM recent faults")
+    field(INPA, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):RTM_FAULTOUT CPP")
+    field(INPB, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):RTM_FAULTCOUNT")
+    field(CALC, "A + B")
+    field(OUT,  "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):RTM_FAULTCOUNT PP")
+    field(ASG,  "Internal")
+}
+
+record(longout, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):RTM_FAULTCOUNT")
+{
+    field(PINI, "YES")
+    field(DESC, "RTM recent faults counter")
+    field(HSV,  "MAJOR")
+    field(VAL,  "0")
+}
+
+record(longout, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):RTM_FAULTCOUNT_MAX")
+{
+    field(PINI, "YES")
+    field(DESC, "Max number of recent RTM faults")
+    field(OUT,  "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):RTM_FAULTCOUNT.HIGH PP")
+    field(VAL,  "3")
+    info(autosaveFields, "VAL")
+}
+
+record(ao, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):RTM_FAULTCOUNT_PERIOD")
+{
+    field(PINI, "YES")
+    field(DESC, "Period for recent RTM faults")
+    field(EGU,  "s")
+    field(PREC, "1")
+    field(VAL,  "3")
+    info(autosaveFields, "VAL")
+}
+
 record(longout, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):RTM_CLEARFAULTCOUNT")
 {
     field(PINI, "YES")
     field(DESC, "RTM recent clear fault counter")
-    field(HSV,  "MAJOR")
-}
-
-record(longout, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):RTM_CLEARFAULTCOUNT_MAX")
-{
-    field(PINI, "YES")
-    field(DESC, "Max allowed number to try to clear fault")
-    field(OUT,  "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):RTM_CLEARFAULTCOUNT.HIGH")
-    field(VAL,  "3")
-    field(EGU,  "s")
-    info(autosaveFields, "VAL")
+    field(VAL,  "0")
 }
 
 record(bi, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):RTM_ADCLOCK")
