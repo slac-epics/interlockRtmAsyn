@@ -23,6 +23,9 @@ record(mbbo, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):FAULTSEQ_STATUS")
     field(FVST, "Restore triggers")
     field(ONSV, "MAJOR")
     field(TWSV, "MINOR")
+    field(THSV, "MINOR")
+    field(FRSV, "MINOR")
+    field(FVSV, "MINOR")
     field(SCAN, "Passive")
     info(autosaveFields, "VAL")
 }
@@ -37,6 +40,7 @@ record(mbbo, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):FAULTSEQ_MODE")
     field(ONST, "Automatic")
     field(TWST, "Bypass")
     field(SCAN, "Passive")
+    field(TWSV, "MINOR")
     info(autosaveFields, "VAL")
 }
 
@@ -134,22 +138,10 @@ record(bi, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):BCUR_FLT")
     info(autosaveFields, "VAL")
 }
 
-record(ai, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):FAULTSEQ_ADES")
-{
-    field(PINI, "YES")
-    field(DESC, "ADES target for the fault sequencer")
-    field(SCAN, "Passive")
-    field(PREC, "3")
-    field(HHSV, "MAJOR")
-    field(HSV,  "MINOR")
-    field(LSV,  "MINOR")
-    field(LLSV, "MAJOR")
-    info(autosaveFields, "VAL LOLO LOW HIGH HIHI EGU PREC")
-}
-
 record(bi, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):FAULTSEQ_TRIG_MOVED")
 {
     field(DESC, "Seq moved triggers to STDBY")
+    field(PINI, "YES")
     field(ZNAM, "No")
     field(ONAM, "Yes")
 }
@@ -157,7 +149,7 @@ record(bi, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):FAULTSEQ_TRIG_MOVED")
 record(calcout, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):FAULTSEQ_TRIG_MOVED_RESET")
 {
     field(DESC, "Clear FAULTSEQ_TRIG_MOVED")
-    field(INPA, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):MODECFG CP")
+    field(INPA, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):TRIG_CONTROL CP")
     field(CALC, "0")
     field(OUT,  "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):FAULTSEQ_TRIG_MOVED PP")
     field(ASG,  "Internal")
