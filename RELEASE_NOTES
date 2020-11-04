@@ -1,3 +1,10 @@
+R1.8.2     10-26-2020   Jesus Vasquez
+                        - Update high level PV name, TRIG_CONTROL to TRIGMODE.
+                        - Restore RTM_FAULTCOUNT_CALC, RTM_FAULTCOUNT, RTM_FAULTCOUNT_MAX and 
+                          RTM_FAULTCOUNT_PERIOD PVs, and remove RTM_CLEARFAULTCOUNT_MAX.
+                        - Remove FAULTSEQ_ADES. Point FAULTSEQ_TRIG_MOVED_RESET to TRIG_CONTROL,
+                          and set missing alarm states for FAULTSEQ_STATUS and FAULTSEQ_MODE.
+
 R1.8.1     10-26-2020   Jesus Vasquez
                         - Remove unused PV RTM_CLEARFAULTCOUNT_RESETDELAY.
 
