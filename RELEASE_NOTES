@@ -1,3 +1,6 @@
+R1.8.3     11-23-2020   Kukhee Kim
+                        - buiild with llrfHls R4.2.1
+
 R1.8.2     10-26-2020   Jesus Vasquez
                         - Update high level PV name, TRIG_CONTROL to TRIGMODE.
                         - Restore RTM_FAULTCOUNT_CALC, RTM_FAULTCOUNT, RTM_FAULTCOUNT_MAX and 
