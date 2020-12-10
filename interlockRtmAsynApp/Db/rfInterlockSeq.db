@@ -154,3 +154,39 @@ record(calcout, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):FAULTSEQ_TRIG_MOVED_RESET")
     field(OUT,  "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):FAULTSEQ_TRIG_MOVED PP")
     field(ASG,  "Internal")
 }
+
+record(ao, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):FAULTSEQ_RAMP_STEP")
+{
+    field(DESC, "Ramp step size")
+    field(PREC, "1")
+    field(EGU,  "%")
+    field(DRVL, "0")
+    field(DRVH, "100")
+    field(SCAN, "Passive")
+    field(VAL,  "0.3")
+    info(autosaveFields, "VAL DRVL DRVH EGU")
+}
+
+record(ao, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):FAULTSEQ_ADES_FACTOR")
+{
+    field(DESC, "Factor of ADES for the fast ramp")
+    field(PREC, "1")
+    field(EGU,  "%")
+    field(DRVL, "0")
+    field(DRVH, "100")
+    field(SCAN, "Passive")
+    field(VAL,  "90")
+    info(autosaveFields, "VAL DRVL DRVH")
+}
+
+record(ao, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):FAULTSEQ_RAMP_STEP_FACTOR")
+{
+    field(DESC, "Step size factor for the slow ramp")
+    field(PREC, "1")
+    field(EGU,  "%")
+    field(DRVL, "0")
+    field(DRVH, "100")
+    field(SCAN, "Passive")
+    field(VAL,  "10")
+    info(autosaveFields, "VAL DRVL DRVH")
+}
