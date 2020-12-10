@@ -190,3 +190,15 @@ record(ao, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):FAULTSEQ_RAMP_STEP_FACTOR")
     field(VAL,  "10")
     info(autosaveFields, "VAL DRVL DRVH")
 }
+
+record(ao, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):FAULTSEQ_AMET")
+{
+    field(DESC, "Amplitude tolerance during ramping")
+    field(PREC, "1")
+    field(EGU,  "%")
+    field(DRVL, "0")
+    field(DRVH, "100")
+    field(SCAN, "Passive")
+    field(VAL,  "5")
+    info(autosaveFields, "VAL DRVL DRVH EGU")
+}
