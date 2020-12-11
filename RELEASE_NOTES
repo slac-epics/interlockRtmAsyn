@@ -1,3 +1,13 @@
+
+                        - Fault seq: change Idle state name to "OK".
+                        - Fault seq: Add a PV for amplitude tolerance "FAULTSEQ_AMET", used by the fault
+                          sequencer during ramping, to ensure that the amplitude is actually ramping up.
+                        - Fault seq: Add PVs to control the new 2-stage ramp used by the fault sequencer:
+                          * FAULTSEQ_RAMP_STEP: amplitude step size, used during the first fast ramp stage
+                          * FAULTSEQ_ADES_FACTOR: factor of ADES to do with the first fast ramp stage
+                          * FAULTSEQ_RAMP_STEP_FACTOR: Factor of the step size to use during the second 
+                            slow ramp stage.
+
 R1.8.3     11-23-2020   Kukhee Kim
                         - buiild with llrfHls R4.2.1
 
