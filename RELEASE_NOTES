@@ -1,4 +1,5 @@
 
+R1.9.0     12-11-2020   Jesus Vasquez
                         - Fault seq: change Idle state name to "OK".
                         - Fault seq: Add a PV for amplitude tolerance "FAULTSEQ_AMET", used by the fault
                           sequencer during ramping, to ensure that the amplitude is actually ramping up.
