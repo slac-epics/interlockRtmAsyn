@@ -99,15 +99,6 @@ record(bo, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):FAULTSEQ_MOVE_TRIG")
     info(autosaveFields, "VAL ZSV OSV")
 }
 
-record(bo, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):FAULTSEQ_MOVE_FDBK")
-{
-    field(DESC, "Override feedback during fault")
-    field(ZNAM, "Disable")
-    field(ONAM, "Enable")
-    field(VAL,  "1")
-    info(autosaveFields, "VAL ZSV OSV")
-}
-
 record(ao, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):BCUR_FLT_DELAY")
 {
     field(DESC, "time delay before beamcurrent fault")
