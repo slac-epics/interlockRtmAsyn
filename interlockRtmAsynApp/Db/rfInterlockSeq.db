@@ -190,12 +190,3 @@ record(ao, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):FAULTSEQ_AMET")
     field(VAL,  "5")
     info(autosaveFields, "VAL DRVL DRVH EGU")
 }
-
-record(ai, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):FAULTSEQ_ADES")
-{
-    field(PINI, "YES")
-    field(DESC, "ADES target for the fault sequencer")
-    field(SCAN, "Passive")
-    field(PREC, "2")
-    info(autosaveFields, "VAL LOLO LOW HIGH HIHI HHSV HSV LSV LLSV EGU PREC")
-}
