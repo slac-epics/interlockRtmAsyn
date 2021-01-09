@@ -1,4 +1,10 @@
 
+R1.10.0    01-08-2021   Jesus Vasquez
+                        - Fault seq: Remove "Restore feedback" state from the "FAULTSEQ_STATUS" PV,
+                          as this state does not longer exist in the sequencer.
+                        - Fault seq: remove the now unused "FAULTSEQ_MOVE_FDBK" PV, as the sequencer
+                          does not longer controls the feedback settings.
+
 R1.9.0     12-11-2020   Jesus Vasquez
                         - Fault seq: change Idle state name to "OK".
                         - Fault seq: Add a PV for amplitude tolerance "FAULTSEQ_AMET", used by the fault
@@ -6,7 +12,7 @@ R1.9.0     12-11-2020   Jesus Vasquez
                         - Fault seq: Add PVs to control the new 2-stage ramp used by the fault sequencer:
                           * FAULTSEQ_RAMP_STEP: amplitude step size, used during the first fast ramp stage
                           * FAULTSEQ_ADES_FACTOR: factor of ADES to do with the first fast ramp stage
-                          * FAULTSEQ_RAMP_STEP_FACTOR: Factor of the step size to use during the second 
+                          * FAULTSEQ_RAMP_STEP_FACTOR: Factor of the step size to use during the second
                             slow ramp stage.
 
 R1.8.3     11-23-2020   Kukhee Kim
@@ -14,7 +20,7 @@ R1.8.3     11-23-2020   Kukhee Kim
 
 R1.8.2     10-26-2020   Jesus Vasquez
                         - Update high level PV name, TRIG_CONTROL to TRIGMODE.
-                        - Restore RTM_FAULTCOUNT_CALC, RTM_FAULTCOUNT, RTM_FAULTCOUNT_MAX and 
+                        - Restore RTM_FAULTCOUNT_CALC, RTM_FAULTCOUNT, RTM_FAULTCOUNT_MAX and
                           RTM_FAULTCOUNT_PERIOD PVs, and remove RTM_CLEARFAULTCOUNT_MAX.
                         - Remove FAULTSEQ_ADES. Point FAULTSEQ_TRIG_MOVED_RESET to TRIG_CONTROL,
                           and set missing alarm states for FAULTSEQ_STATUS and FAULTSEQ_MODE.
@@ -23,11 +29,11 @@ R1.8.1     10-26-2020   Jesus Vasquez
                         - Remove unused PV RTM_CLEARFAULTCOUNT_RESETDELAY.
 
 R1.8.0     10-22-2020   Jesus Vasquez
-                        - Fix PV related to the fault sequencer. Removed unused PV, and add 
+                        - Fix PV related to the fault sequencer. Removed unused PV, and add
                           new PV
 
 R1.7.0     10-15-2020   Jesus Vasquez
-                        - Add Perveance PV: PERV_PK, calculated from scaled peak beam 
+                        - Add Perveance PV: PERV_PK, calculated from scaled peak beam
                           current and voltage, and expressed un uK.
                         - Restore Forward Power PVs.
 
@@ -83,4 +89,4 @@ R0.1.0     06-29-2020     Kukhee Kim
                           (version, date, type and more diagnostics)
 
 R0.0.0     06-28-2020     Kukhee Kim
-                        - initial release   
+                        - initial release
