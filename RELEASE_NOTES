@@ -1,3 +1,7 @@
+ued_support 02-11-2021  Kukhee Kim
+                        - branch out from R1.10.0 to support ued 1kHz operation
+                        - build with llrfHls API R4.3.0
+
 
 R1.10.0    01-08-2021   Jesus Vasquez
                         - Fault seq: Remove "Restore feedback" state from the "FAULTSEQ_STATUS" PV,
