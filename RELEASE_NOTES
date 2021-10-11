@@ -1,3 +1,7 @@
+
+R2.0.2     10-11-2021   M. Dunning (mdunning)
+                        - Upgrade to asyn R4.39-0.0.1, yamlLoader R2.2.0
+
 R2.0.1     03-02-2021   Kukhee Kim (khkim)
                         - build with BsaCore R1.5.4 and event R4.5.5
 
