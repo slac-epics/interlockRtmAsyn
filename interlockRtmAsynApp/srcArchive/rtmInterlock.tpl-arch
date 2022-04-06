@@ -1,0 +1,58 @@
+# Abs: RTM Interlock Archive PV List
+#
+# File: rtmInterlock.tpl-arch
+#
+# Format:  PVNAME     INTERVAL     [ monitor | scan ]
+# The interval is in seconds.
+#
+# Name				     Interval	Mode
+#---------------------------------------------------------
+$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):RTM_CLEARFAULT               1.0		monitor
+$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):RTM_STATUS_HEX               1.0		monitor
+$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):RTM_RF_ON                    1.0		monitor
+$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):RTM_MOTR_TIMEOUT             1.0		monitor
+$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):RTM_MOTR_DETUNING            1.0		monitor
+$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):RTM_MOTR_TUNING              1.0		monitor
+$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):RTM_LOWER_TUNED              1.0		monitor
+$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):RTM_UPPER_TUNED              1.0		monitor
+$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):RTM_MOTR_NOT_TUNED           1.0		monitor
+$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):RTM_LOWER_DETUNED            1.0		monitor
+$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):RTM_UPPER_DETUNED            1.0		monitor
+$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):RTM_MOTOR_NOT_DETUNED        1.0		monitor
+$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):RTM_MOD_FAULT                1.0		monitor
+$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):RTM_CURR_UNDER               1.0		monitor
+$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):RTM_CURR_OVER                1.0		monitor
+$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):RTM_VOLT_OVER                1.0		monitor
+$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):RTM_FP_OVER                  1.0		monitor
+$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):RTM_RP_OVER                  1.0		monitor
+$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):RTM_MOTR_ON                  1.0		monitor
+$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):RTM_SLED_TUNED               1.0		monitor
+$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):RTM_SLED_DETUNED             1.0		monitor
+$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):RTM_SLED_SUMY                1.0		monitor
+$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):RTM_SLED_SML                 1.0		monitor
+$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):RTM_FAULTSUMY                1.0		monitor
+$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):SLED                         1.0		monitor
+$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):SLEDDES                      1.0		monitor
+$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):RTM_FAULTCOUNT               1.0		monitor
+$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):RTM_FAULTCOUNT_MAX           1.0		monitor
+$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):RTM_FAULTCOUNT_PERIOD        1.0		monitor
+$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):RTM_ADCLOCK                  1.0		monitor
+$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):RTM_FAULTOUT                 1.0		monitor
+$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):RE_ILK_RAW                   10.0	scan
+$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):RE_ILK_SCALE                 1.0		monitor
+$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):BC_ILK_RAW                   10.0 	scan
+$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):BC_ILK_SCALE                 1.0		monitor
+$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):BV_ILK_RAW                   10		scan
+$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):BV_ILK_SCALE                 1.0		monitor
+$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):SET_RE_ILK                   1.0		monitor
+$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):SET_RE_ILK_RAW               1.0		monitor
+$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):SET_BC_ILK                   1.0		monitor
+$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):SET_BC_ILK_RAW               1.0		monitor
+$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):SET_BV_ILK                   1.0		monitor
+$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):SET_BV_ILK_RAW               1.0		monitor
+
+# End of file
+
+
+
+

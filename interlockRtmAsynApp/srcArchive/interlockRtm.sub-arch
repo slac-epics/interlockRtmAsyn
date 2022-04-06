@@ -1,0 +1,21 @@
+# Abs: Interlock RTM Archive PV List
+#
+file rtmInterlock.tpl-arch
+{
+    pattern {  }
+            {  }
+}
+
+file rtmWaveform.tpl-arch
+{
+    pattern {  }
+            {  }
+}
+
+file rfInterlockSeq.tpl-arch
+{
+    pattern {  }
+            {  }
+}
+
+# End of file

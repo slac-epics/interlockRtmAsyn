@@ -1,0 +1,29 @@
+# Abs: RF Interlock Sequencer Archive PV List
+#
+# File: rfInterlockSeq.tpl-arch
+#
+# Format:  PVNAME     INTERVAL     [ monitor | scan ]
+# The interval is in seconds.
+#
+# Name				     Interval	Mode
+#---------------------------------------------------------
+$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):FAULTSEQ_RESET               1.0		monitor
+$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):FAULTSEQ_STATUS              1.0		monitor
+$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):FAULTSEQ_RAMPTIME            1.0		monitor
+$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):FAULTSEQ_FDBK_TIMEOUT        1.0		monitor
+$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):FAULTSEQ_FDBK_MOVE_TRIG      1.0		monitor
+$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):FAULTSEQ_FDBK_MOVE_FDBK      1.0		monitor
+$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):BCUR_FLT_DELAY               1.0		monitor
+$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):BCUR_FLT                     1.0		monitor
+$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):FAULTSEQ_TRIG_MOVED          1.0		monitor
+$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):FAULTSEQ_RAMP_STEP           1.0		monitor
+$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):FAULTSEQ_ADES_FACTOR         1.0		monitor
+$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):FAULTSEQ_RAMP_STEP_FACTOR    1.0		monitor
+$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):FAULTSEQ_AMET                1.0		monitor
+$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):FAULTSEQ_MODE                1.0		monitor
+
+# End of file
+
+
+
+

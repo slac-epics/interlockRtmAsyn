@@ -1,0 +1,18 @@
+# Abs: RTM Waveform Archive PV List
+#
+# File: rfInterlockSeq.tpl-arch
+#
+# Format:  PVNAME     INTERVAL     [ monitor | scan ]
+# The interval is in seconds.
+#
+# Name				     Interval	Mode
+#---------------------------------------------------------
+$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):CURR       1    monitor
+$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):DIVR       1    monitor
+$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):PERV_PK    10   scan
+
+# End of file
+
+
+
+
