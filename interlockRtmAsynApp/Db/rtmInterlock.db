@@ -708,19 +708,20 @@ record(ao, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):SET_RE_ILK")
     field(HSV,  "MINOR")
     field(LSV,  "MINOR")
     field(LLSV, "MAJOR")
+    field(FLNK, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):SET_RE_ILK_RAW_CALC")
     info(autosaveFields, "VAL DESC LOLO LOW HIGH HIHI")
 }
 
 # Conversion from MW to raw %
-record(calcout, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):SET_RE_ILK_CALC")
-{
+record(calcout, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):SET_RE_ILK_RAW_CALC")
+{  
     field(INPA, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):SET_RE_ILK")
     field(INPB, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):RE_RTM_SCALE")
     field(INPC, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):RE_ILK_SCALE")
-    #field(CALC, "100 * A / (B*C)")
     field(CALC, "((A/(B*C)-0.275)/2.75)*80+10")
     field(OUT,  "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):SET_RE_ILK_RAW PP")
     field(ASG,  "Internal")
+    field(SDIS, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):SET_RE_ILK_CALC.PACT")
 }
 
 record(ao, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):SET_RE_ILK_RAW")
@@ -740,7 +741,21 @@ record(ao, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):SET_RE_ILK_RAW")
     field(HSV,  "MINOR")
     field(LSV,  "MINOR")
     field(LLSV, "MAJOR")
+    field(FLNK, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):SET_RE_ILK_CALC")
     info(autosaveFields, "VAL DESC LOLO LOW HIGH HIHI")
+}
+
+# Convert from raw % to MW
+record(calcout, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):SET_RE_ILK_CALC")
+{
+    field(DESC, "Set Voltage threshold readback")
+    field(INPA, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):SET_RE_ILK_RAW")
+    field(INPB, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):RE_RTM_SCALE")
+    field(INPC, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):RE_ILK_SCALE")
+    field(CALC, "(((A-10)/80)*2.75+0.275)*B*C")
+    field(OUT,  "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):SET_RE_ILK PP")
+    field(ASG,  "Internal")
+    field(SDIS, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):SET_RE_ILK_RAW_CALC.PACT")
 }
 
 record(ao, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):SET_BC_ILK")
@@ -754,19 +769,20 @@ record(ao, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):SET_BC_ILK")
     field(HSV,  "MINOR")
     field(LSV,  "MINOR")
     field(LLSV, "MAJOR")
+    field(FLNK, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):SET_BC_ILK_RAW_CALC")
     info(autosaveFields, "VAL DESC LOLO LOW HIGH HIHI")
 }
 
-# Convert from Amps to raw %
-record(calcout, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):SET_BC_ILK_CALC")
-{
+# Conversion from Amps to raw %
+record(calcout, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):SET_BC_ILK_RAW_CALC")
+{  
     field(INPA, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):SET_BC_ILK")
     field(INPB, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):BC_RTM_SCALE")
     field(INPC, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):BC_ILK_SCALE")
-    #field(CALC, "100 * A / (B*C)")
     field(CALC, "((A/(B*C)-0.275)/2.75)*80+10")
     field(OUT,  "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):SET_BC_ILK_RAW PP")
     field(ASG,  "Internal")
+    field(SDIS, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):SET_BC_ILK_CALC.PACT")
 }
 
 record(ao, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):SET_BC_ILK_RAW")
@@ -786,7 +802,21 @@ record(ao, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):SET_BC_ILK_RAW")
     field(HSV,  "MINOR")
     field(LSV,  "MINOR")
     field(LLSV, "MAJOR")
+    field(FLNK, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):SET_BC_ILK_CALC")
     info(autosaveFields, "VAL DESC LOLO LOW HIGH HIHI")
+}
+
+# Convert from raw % to Amps
+record(calcout, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):SET_BC_ILK_CALC")
+{
+    field(DESC, "Set Voltage threshold readback")
+    field(INPA, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):SET_BC_ILK_RAW")
+    field(INPB, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):BC_RTM_SCALE")
+    field(INPC, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):BC_ILK_SCALE")
+    field(CALC, "(((A-10)/80)*2.75+0.275)*B*C")
+    field(OUT,  "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):SET_BC_ILK PP")
+    field(ASG,  "Internal")
+    field(SDIS, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):SET_BC_ILK_RAW_CALC.PACT")
 }
 
 record(ao, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):SET_BV_ILK")
@@ -800,19 +830,20 @@ record(ao, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):SET_BV_ILK")
     field(HSV,  "MINOR")
     field(LSV,  "MINOR")
     field(LLSV, "MAJOR")
+    field(FLNK, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):SET_BV_ILK_RAW_CALC")
     info(autosaveFields, "VAL DESC LOLO LOW HIGH HIHI")
 }
 
-# Convert from kV to raw %
-record(calcout, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):SET_BV_ILK_CALC")
-{
+# Conversion from kV to raw %
+record(calcout, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):SET_BV_ILK_RAW_CALC")
+{  
     field(INPA, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):SET_BV_ILK")
     field(INPB, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):BV_RTM_SCALE")
     field(INPC, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):BV_ILK_SCALE")
-    #field(CALC, "100 * A / (B*C)")
     field(CALC, "((A/(B*C)-0.275)/2.75)*80+10")
     field(OUT,  "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):SET_BV_ILK_RAW PP")
     field(ASG,  "Internal")
+    field(SDIS, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):SET_BV_ILK_CALC.PACT")
 }
 
 record(ao, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):SET_BV_ILK_RAW")
@@ -832,6 +863,20 @@ record(ao, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):SET_BV_ILK_RAW")
     field(HSV,  "MINOR")
     field(LSV,  "MINOR")
     field(LLSV, "MAJOR")
+    field(FLNK, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):SET_BV_ILK_CALC")
     info(autosaveFields, "VAL DESC LOLO LOW HIGH HIHI")
+}
+
+# Convert from raw % to kV
+record(calcout, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):SET_BV_ILK_CALC")
+{
+    field(DESC, "Set Voltage threshold readback")
+    field(INPA, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):SET_BV_ILK_RAW")
+    field(INPB, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):BV_RTM_SCALE")
+    field(INPC, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):BV_ILK_SCALE")
+    field(CALC, "(((A-10)/80)*2.75+0.275)*B*C")
+    field(OUT,  "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):SET_BV_ILK PP")
+    field(ASG,  "Internal")
+    field(SDIS, "$(DEV=$(PRIMARY):$(MICRO):$(UNIT)):SET_BV_ILK_RAW_CALC.PACT")
 }
 
